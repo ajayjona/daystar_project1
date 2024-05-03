@@ -1,0 +1,35 @@
+{% extends "application/base.html" %}
+
+{% block content %}
+
+<div class="content">
+    <div class="flex gap-2 py-4">
+        <input type="text" placeholder="search" class="rounded-lg border p-4 w-full">
+        <button class="p-2 bg-black text-white  rounded-lg">Search </button>
+    </div>
+    <a href="/inventory/add" class="p-2 bg-primary text-center text-white w-25 rounded m-2"> Add Item</a>
+    <div class="w-ful">
+        <p class="p-2 text-lg">Recent Items</p>
+        <table class="w-100 text-center text-dark  ">
+            <thead class="bg-secondary p-2 m-2 text-white">
+                <tr>
+                     <th>#</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Available</th>
+                </tr>
+            </thead>
+            <tbody class="text-dark">
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td><a class="text-blue-500" href="/inventory/view/{{ iitem.id}}"> {{ item.item_name }}</a></td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.current_stock }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock  %}

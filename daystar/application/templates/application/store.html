@@ -1,0 +1,320 @@
+{% comment %} {% load static %} {% endcomment %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap" rel="stylesheet">
+    <!-- material_icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<title>DayStar Daycare management ststem</title>
+</head>
+<body>
+
+    <div class="grid-container">
+        <!-- header -->
+        <header class="header">
+            <div class="menu-icon" onclick="openSidebar()">
+                <span class="material-icons-outlined">menu</span>
+            </div>
+            <div class="header-left">
+                <span class="material-icons-outlined">search  </span>
+                <input type="text" class="search-input" placeholder="Search...">
+                <button type="submit" > Search</button>
+            </div>
+            <div class="header-right">
+                <span class="material-icons-outlined">notifications</span>
+                <span class="material-icons-outlined">email </span>
+                <span class="material-icons-outlined">account_circle </span>
+            </div>
+        </header>
+        <!-- end header -->
+
+
+        <!-- sidebar -->
+        <aside id="sidebar">
+            <div class="sidebar-title">
+                <div class="sidebar-brand">
+                    <span class="material-icons-outlined"> history_edu</span>DayStar Admin
+                </div>
+                <span class="material-icons-outlined" onclick="closeSidbar()"> close</span>
+            </div>
+            
+            <ul class="sidebar-list">
+                <a href="/">
+                    <li class="sidebar-list-item">
+                        <span class="material-icons-outlined">dashboard</span>Dashboard
+                    </li>
+                </a>
+                <a href="/sitter">
+                    <li class="sidebar-list-item">
+                        <span class="material-icons-outlined">person</span>Sitters
+                    </li>
+                </a>
+                <a href="/baby">
+                    <li class="sidebar-list-item">
+                        <span class="material-icons-outlined">child_care</span>Babies
+                    </li>
+                </a>
+                <a href="/inventory">
+                    <li class="sidebar-list-item">
+                        <span class="material-icons-outlined">inventory</span>Inventory
+                    </li>
+                </a>
+                <a href="/payments">
+                    <li class="sidebar-list-item">
+                        <span class="material-icons-outlined">payments</span> Payments
+                    </li>
+                </a>
+                <a href="/settings">
+                <li class="sidebar-list-item">
+                    <span class="material-icons-outlined">settings</span>Settings
+                </li>
+                
+            </ul>
+        </aside>
+        <!-- end sidebar -->
+        {% block content %}
+      {% endblock  %}
+    
+        <footer class="footer">
+            <p> Copyright &copy;2024 Daystar Daycare</p>
+        </footer>
+       <script src="{% static 'js/scripts.js' %}"></script>
+    </div>
+</body>
+</html> {% endcomment %}
+
+
+
+{% comment %} from indexpage 
+{% extends "application/base.html" %}
+
+{% block content %}
+
+{% comment %} <main class="main-container">
+        {% comment %} cards {% endcomment %}
+        {% comment %} <div class="main-cards"> {% endcomment %}
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>BABIES</h3>
+                    <span class="material-icons-outlined"> child_care</span>
+                </div>
+                <h1>{{ count_babies }}</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>SITTERS</h3>
+                    <span class="material-icons-outlined">woman </span>
+                </div>
+                <h1>{{ count_sitters }}</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>INVENTORY</h3>
+                    <span class="material-icons-outlined">inventory</span>
+                </div>
+                <h1>{{ count_items }}</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>PAYMENTS</h3>
+                    <span class="material-icons-outlined">payments</span>
+                </div>
+                <h1>{{ count_payments }}</h1>
+            </div>
+
+        {% comment %} </div> {% endcomment %}
+        {% comment %} cards {% endcomment %}
+    {% comment %} <div class="table"> {% endcomment %}
+        <div class="flex gap-2 py-4">
+            <input type="text" placeholder="search" class="rounded-lg border p-4 w-full">
+            <button class="p-2 bg-black text-white  rounded-lg">Search </button>
+        </div>
+    {% comment %} table {% endcomment %}
+        {% comment %} <div class=" flex gap-2 p-2"> {% endcomment %}
+            <div class="w-ful">
+                <p class="p-2 text-lg">Recent Babies</p>
+                <table class=" text-center">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Time In</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for baby in recent_babies %}
+                        <tr>
+                            <td>{{ baby.id }}</td>
+                            <td><a class="text-blue-700 hover:text-gray-400" href="/baby/view/{{ baby.id}}"> {{ baby.fname }}  {{ baby.lname }}</a></td>
+                            <td>{{ baby.age }}</td>
+                            <td>{{ baby.gender }}</td>
+                            <td>{{ baby.time_in }}</td>
+                            <td>{{ baby.message_left }}</td>
+                            
+
+                        </tr>
+
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+            <div class="w-ful">
+                <p class="p-2 text-lg">Recent Sitters</p>
+                <table class="w-full text-center">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Sitter  Number</th>
+                            <th>Contact</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sitter in recent_sitters %}
+                        <tr>
+                            <td>{{ sitter.id }}</td>
+                            <td><a class="text-blue-700 hover:text-gray-400"  href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                            <td>{{ sitter.gender }}</td>
+                            <td>{{ sitter.sitternumber }}</td>
+                            <td>{{ sitter.contact }}</td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+
+        {% comment %} </div> {% endcomment %}
+        {% comment %} </div>  {% endcomment %}
+    {% comment %} </div> {% endcomment %}
+    {% comment %} End table {% endcomment %}
+{% comment %} </main> {% endcomment %}
+
+
+
+
+
+{% comment %} 
+class Categorystay(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+#
+    def __str__(self):
+        return self.name
+
+
+
+
+
+class Baby(models.Model):
+    fname = models.CharField(max_length=255)
+    lname = models.CharField(max_length=255)
+    age = models.CharField(max_length=255)
+    gender = models.CharField(max_length=255)
+    location = models.CharField(max_length=100)
+    image = models.CharField(max_length=255)
+    broughtby = models.CharField(max_length=200)
+    timein = models.DateTimeField(auto_now=False)
+    timeout = models.DateTimeField(auto_now=True)
+    fees= models.CharField(max_length=100 , null=True, blank=True)
+    parent_name = models.CharField(max_length= 200)
+    periodstay = models.CharField(max_length=20)
+    babynumber = models.IntegerField(null=True)
+    message_left = models.TextField(max_length=1000)
+    broughtby = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    category = models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=True, blank=True)
+
+
+class Sitter(models.Model):
+    fname = models.CharField(max_length=255)
+    lname = models.CharField(max_length=255)
+    age = models.CharField(max_length=255)
+    gender = models.CharField(max_length=255)
+    location = models.CharField(max_length=100)
+    image = models.CharField(max_length=255)
+    DOB = models.CharField(max_length=200)
+    NxtoK = models.CharField(max_length=150)
+    NIN = models.CharField(max_length=50, blank=True, null=True)
+    recommender = models.CharField(max_length= 200)
+    educationlevel = models.CharField(max_length=20)
+    sitternumber = models.CharField(max_length=50)
+    contact = models.CharField(max_length=20, default=1)
+
+#i cant connect my model items to my views 
+class Item(models.Model):
+    dolls = models.CharField(max_length=50)
+    toys = models.CharField(max_length=50)
+    milk = models.CharField(max_length=50)
+    daipers = models.CharField(max_length=50)
+    babyfood = models.CharField(max_length=50)
+    fruits = models.CharField(max_length=50)
+    date_recieved = models.DateField()
+#add sold items class
+#how to be able to access some paricular items/objects/attributes from this class in my views and table
+class Pay(models.Model):
+    payee =  models.ForeignKey(Baby, on_delete=models.CASCADE, null=True, blank=True)
+    payment_sitter = models.ForeignKey(Sitter, on_delete=models.CASCADE, null=True, blank=True)
+    payment_cat= models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=True, blank=True)
+    pay_number = models.IntegerField(null=True, blank=True)
+    amount = models.FloatField( null=True, blank=True)
+    date = models.DateTimeField( auto_now_add=True)
+    description = models.TextField()
+
+
+{% endcomment %}
+
+{% comment %} <div class="container">
+        <form method="post" class="d-grid m-auto">
+            <input type="text" name="lname" required placeholder="Last name" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="fname" required placeholder="First name" class="p-2 border bg-gray-800 text-gray-300">    
+            <input type="text" name="broughtby" required placeholder="Brought By;" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="number" name="Age" required placeholder="Age" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="parent_name" required placeholder="Parent's name" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="periodstay"required  placeholder="period of stay" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="time" name="timein" required placeholder="Time In" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="babynumber" required placeholder="Baby number" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="address" required placeholder="Address" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="number" name="fees" required placeholder="Fees in UGX" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text"  name="message_left" placeholder="Message" class="p-2 border bg-gray-800 text-gray-300">
+            <label for="gender"required >Select Gender</label>
+            <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option> 
+            </select>
+            <button type="submit" class="p-2 rounded-lg shadow bg-green-500 text-white text-center">Add Baby</button>
+        </form>
+    </div>      {% endcomment %}
+
+
+{% comment %} 
+this is for a view of edit sitter using forms.py
+    def editsitter(request, id):
+#     sitter = Sitter.objects.get(id=id)
+#     if request.method == 'POST':
+#         sitterForm = Addsitter(request.post, instance = sitter)
+#         if sitterForm.is_valid():
+#             sitterForm.save()
+#             return redirect('/sitter/')
+#         else:
+#             print('form is not valid')
+#     else:
+#         sitterForm = Addsitter(instance = sitter)
+#         return render(request, 'application/edit_sitter.html', {'sitterForm':sitterForm})
+
+ {% endcomment %}

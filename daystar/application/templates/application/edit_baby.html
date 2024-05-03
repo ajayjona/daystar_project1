@@ -1,0 +1,34 @@
+
+
+{% extends "application/base.html" %}
+
+{% block content  %}
+    {% if message != none %}
+        <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">
+            {{ message }}
+        </div>
+hi edit 
+    {% endif %}   
+     {% if baby %}  
+        <form method="post" class="p-4 w-1/2 flex flex-col gap-2">
+            <input type="text" name="lname" required placeholder="{{ baby.lname }}" class="">
+            <input type="text" name="fname" required placeholder="{{ baby.fname }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="broughtby" required placeholder="{{baby.broughtby }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="number" name="Age" required placeholder="{{ baby.age }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="parent_name" required placeholder="{{baby.parent_name}}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="periodstay"required  placeholder="{{ baby.periodstay }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="time" name="timein" required placeholder="{{ baby.timein }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="babynumber" required placeholder="{{ baby.babynumber }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text" name="address" required placeholder="{{ baby.address }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="number" name="fees" required placeholder="{{ baby.fees }}" class="p-2 border bg-gray-800 text-gray-300">
+            <input type="text"  name="message_left" placeholder="{{ baby.message_left }}" class="p-2 border bg-gray-800 text-gray-300">
+            <label for="gender"required >Select Gender</label>
+            <select name="gender" id="gender"> 
+                <option value="male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option> 
+            </select>
+            <button type="submit" class="">Edit  Baby</button>
+        </form>
+    {% endif %}
+{% endblock  %}

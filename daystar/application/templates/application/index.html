@@ -1,0 +1,62 @@
+{% extends "application/base.html" %}
+{% load static %}
+
+{% block content  %}
+
+        <!-- main -->
+        <main class="main-container">
+            <div class="main-cards">
+                <div class="card">
+                    <div class="card-inner text-white">
+                        <h3 class="text-white">BABIES</h3>
+                        <span class="material-icons-outlined">child_care</span>
+                    </div>
+                    <h1 class = "text-center">{{ count_babies }}</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner text-white">
+                        <h3 class="text-white">SITTERS</h3>
+                        <span class="material-icons-outlined">
+                            groups
+                            </span>
+                    </div>
+                    <h1 class="text-center">{{ count_sitters }}</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner text-white">
+                        <h3 class="text-white">ITEMS</h3>
+                        <span class="material-icons-outlined">
+                            inventory
+                            </span>
+                    </div>
+                    <h1 class = "text-center">{{ count_items }}</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner text-white">
+                        <h3 class="text-white">PAYMENTS</h3>
+                        <span class="material-icons-outlined">
+                            payments
+                            </span>
+                    </div>
+                    <h1 class = "text-center">{{ count_payments }}</h1>
+                </div>
+
+            </div>
+         <div class="charts">
+            <div class="charts-card">
+                <h2 class="chart-title">EVENTS</h2>
+                <div id="bar-chart"></div>
+            </div>
+
+            <div class="charts-card">
+                <h2 class="chart-title">Doll Purchase and Sales Orders</h2>
+                <div id="area-chart"></div>
+            </div>
+         </div>
+
+        </main>
+          <!-- end main -->
+{% endblock  %}

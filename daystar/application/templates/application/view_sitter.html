@@ -1,0 +1,52 @@
+{% extends "application/base.html" %}
+
+
+{% block content %}
+<div class="content">
+    <div class="p-2 flex gap-2 justify-end ">
+        <a href="/sitter/edit/{{ id }}" class=""> Edit sitter</a>
+        <a href="/baby/delet/{{ id }}" class="">Delete sitter</a>
+    </div>
+    <div class="w-full grid grid-cols-10 p-4">
+        <div>
+            <img src="https://picsum.photos/200" class="h-[200px] rounded-lg" alt="">
+        </div>
+        <div class="">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ sitter.fname }}  {{ sitter.lname }}</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>{{ sitter.age }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ sitter.gender }}</td>
+                </tr>
+                <tr>
+                    <th>Room </th>
+                    <td>{{ sitter.sitternumber }}</td>
+                </tr>
+                <tr>
+                    <td>{{ baby.categorystay }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <h1 class="p-4">{{ sitter.lname }}'s Information</h1>
+    <table class="w-full mt-4 p-4">
+        <thead class="bg-black text-white">
+            <tr>
+                <th>#</th>
+                <th>Behaviour</th>
+                <th>Amount Paid</th>
+                <th>Date Paid</th>
+                <th>Sitter Activity</th>
+                <th>Available</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+{% endblock  %}

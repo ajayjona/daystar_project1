@@ -1,0 +1,33 @@
+{% extends "application/base.html" %}
+{% load static %}
+{% block content  %}
+    {% if message != none %}
+        <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">{{ message }}</div>
+    {% endif %} 
+    
+
+    <div class="container ">
+        <div class="fill">
+            <form method="post" class="">
+                <div class="form-group p-2">
+                    <label for="formGroupExampleInput">Name</label>
+                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
+                </div>
+                  <div class="form-group p-2">
+                    <label for="formGroupExampleInput">Names</label>
+                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
+                </div>
+                <div class="form-group p-2">
+                    <label for="formGroupExampleInput">Names</label>
+                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
+                </div>
+                <div class="form-group p-2">
+                    <label for="formGroupExampleInput">Names</label>
+                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
+                </div>
+            </form>
+        </div>
+        
+    </div>
+
+{% endblock  %} 

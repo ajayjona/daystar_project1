@@ -1,0 +1,64 @@
+{% extends "application/base.html" %}
+
+
+{% block content %}
+<div class="content">
+    <div class="p-2 flex gap-2 justify-end ">
+        <a href="/sitter/edit/{{ id }}" class="p-2 bg-green "> Edit Baby</a>
+        <a href="/baby/delet/{{ id }}" class="p-2 bg-blue text-white">Delete Baby</a>
+    </div>
+    <div class="w-full grid grid-cols-10 p-4">
+        <div class="col-span-2 p-4">
+            <img src="https://picsum.photos/200" class="h-[200px] rounded-lg" alt="">
+        </div>
+        <div class="">
+            <table>
+                <tr>
+                    <th>Name: </th>
+                    <td>{{ baby.fname }}  {{ baby.lname }} </td>
+                </tr>
+                <tr>
+                    <th>Age: </th>
+                    <td>{{ baby.age }} </td>
+                </tr>
+                <tr>
+                    <th>Gender: </th>
+                    <td>{{ baby.gender }} </td>
+                </tr>
+                <tr>
+                    <th>Period of Stay: </th>
+                    <td>{{ baby.fees }} </td>
+                </tr>
+                <tr>
+                    
+                </tr>
+            </table>
+        </div>
+    </div>
+    <h1 class="p-4">{{ baby.fname }}'s Information</h1>
+    <table class="w-full mt-4 p-4">
+        <thead class="bg-black text-white">
+            <tr>
+                <th>#</th>
+                <th>Behaviour</th>
+                <th>Amount Paid</th>
+                <th>Date Paid</th>
+                <th>Payment Status</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ payment.behaviour }}</td>
+                <td>{{ payment.amount_paid }}</td>
+                <td>{{ payment.date_paid }}</td>
+                <td>{{ payment.payment_status }}</td>
+                <td>{{ payment.message }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock  %}

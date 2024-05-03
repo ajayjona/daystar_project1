@@ -1,0 +1,79 @@
+{% extends "application/base.html" %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container">
+        <h1>Welcome to the sitters page!!</h1> 
+         <div class="search">
+             <input type="text" placeholder="search" class="rounded-lg ">
+             <button class="p-2 bg-black text-white  rounded-lg">Search </button>
+         </div>
+     
+         
+         <a class="btn btn-primary" href="/sitter/add" role="button">Add Sitter</a>
+         <table class="table text-center ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Sitter  Number</th>
+                    <th>Contact</th>
+                    <th>Edit</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for sitter in sitters %}
+                     <tr>
+                         <td>{{ sitter.id }}</td>
+                         <td><a class="text-blue-500" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                         <td>{{ sitter.gender }}</td>
+                         <td>{{ sitter.sitternumber }}</td>
+                         <td>{{ sitter.contact }}</td>
+                         <td><a href="/sitteredit/{{ sitter.id }}">Edit</a></td>
+                     {% endfor %}
+            </tbody>
+          </table>
+          
+             <table class="table table-responsive">
+                 <thead class="thead-dark">
+                    
+                 </thead>
+                 <tbody>
+                   
+             </table>
+
+    </div>
+    {% comment %} </div> {% endcomment %}
+
+    {% comment %} <div class="w-ful">
+        <p class="p-2 text-lg">Recent Sitters</p>
+        <table class="w-full text-center ">
+            <thead class="bg-gray-800 p-4 m-2">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Sitter  Number</th>
+                    <th>Contact</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for sitter in sitters %}
+                <tr>
+                    <td>{{ sitter.id }}</td>
+                    <td><a class="text-blue-500" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                    <td>{{ sitter.gender }}</td>
+                    <td>{{ sitter.sitternumber }}</td>
+                    <td>{{ sitter.contact }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> {% endcomment %}
+</div>
+
+
+{% endblock  %}

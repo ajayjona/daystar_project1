@@ -1,0 +1,40 @@
+{% extends "application/base.html" %}
+
+{% block content  %}
+        
+    {% if message != none %}
+        <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">
+            {{ messages }}
+        </div>
+    {% endif %}
+    {% if sitters %}
+        <form method="post" class="p-4 w-1/2 flex flex-col gap-2">
+            <input type="text" name="fname" required placeholder="{{ sitters.fname }}"  class="p-2 border  ">
+            <input type="text" name="lname" placeholder="{{ sitters.lname }}"  class="p-2 border ">
+            <input type="number" name="age" required placeholder="Age"  class="p-2  ">
+            <input type="date" name="DOB" required placeholder="{{ sitters.DOB}}"  class="p-2 border ">
+            <input type="email" name="email" placeholder="{{ sitters.email }}"  class="p-2 border ">
+            <input type="text" name="contact" placeholder="{{ sitters.contact }}"  class="p-2 border ">
+            <input type="text" name="NIN" placeholder="{{ sitter.NIN }}" class="p-2 border ">
+            <input type="text" name="location" placeholder="{{ sitters.location }}" class="p-2 border ">
+            <input type="text" name="educationlevel" placeholder="{{ sitters.educationlevel }}"  class="p-2 border">
+            <input type="text" name="nok" placeholder="{{ sitters.nok }}"  class="p-2 border ">
+            <input type="text" name="recommender" placeholder="{{ sitters.recommender }}"  class="p-2 border ">
+            <label for="gender" class="p2 gap-2">Level Of Education</label>
+            <select name="education" id="education" class="">
+                <option value="Certificate"></option>
+                <option value="Certificate">Certificate</option>
+                <option value="bachelors">Bachelors Degree</option>
+                <option value="high_school_cert">High School Certificate</option>
+            </select>
+            <label for="gender" class="p2 gap-2">Select Gender</label>
+            <select name="gender" id="gender" class=" text-white">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <button type="submit" class="p-2 rounded-lg shadow bg-teal-500 text-black-800 text-center w-1/2 align-items-center">Edit Sitter</button>
+
+        </form>
+    {% endif %}
+{% endblock  %}
