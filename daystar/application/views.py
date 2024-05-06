@@ -38,16 +38,15 @@ def addbaby(request):
         fname = request.POST['fname']
         lname = request.POST['lname']
         gender = request.POST['gender']
-        age = request.POST['Age']
+        age = request.POST['age']
         parent_name = request.POST['parent_name']
-        periodstay = request.POST['periodstay']
         timein  = request.POST['timein']
         fees = request.POST['fees']
         broughtby = request.POST['broughtby']
         babynumber  = request.POST['babynumber']
         message_left = request.POST['message_left']
-        # Address = request.POST['address'] the address isnt working also if i activate it it brings an error
-        baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, periodstay=periodstay, timein=timein, fees=fees, broughtby=broughtby, babynumber=babynumber, message_left=message_left)
+        # Address = request.POST['address'] 
+        baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, timein=timein, fees=fees, broughtby=broughtby, babynumber=babynumber, message_left=message_left)
         baby.save()
         message = 'Baby added successfully'
     context = {
@@ -142,6 +141,30 @@ def settings(request):
     template = loader.get_template('application/settings.html')
     return HttpResponse(template.render())
 
+# def payments(request):
+#     payments = Pay.objects.all()
+#     context = {
+#         'payments': payments
+#     }
+#     template = loader.get_template('application/payments.html')
+#     return HttpResponse(template.render(context))
+
+
+def payments(request):
+    if request.method == 'POST':
+        baby_id = request.POST['baby_id']
+        sitter_id = request.POST['sitter_id']
+        amount = request.POST['amount']
+        payment_date = request.POST['payment_date']
+        baby = Baby.objects.get(id=baby_id)
+        sitter = Sitter.objects.get(id=sitter_id)
+        pay = Pay(baby=baby, sitter=sitter, amount=amount, payment_date=payment_date)
+        pay.save()
+    else:
+        babies = Baby.objects.all()
+        pays = Pay.objects.all()
+        template = loader.get_template('application/payments.html')
+        return HttpResponse(template.render({'babies':babies, 'pays':pays}))
 def editsitter(request, id):
     
     if request.method == 'POST':
@@ -150,6 +173,11 @@ def editsitter(request, id):
     else:
         sitters = Sitter.objects.get(id=id)
         return render(request, 'application/edit_sitter.html', {'sitters':sitters})
+    
+def deletesitter(request, id):
+    sitter = Sitter.objects.get(id=id)
+    sitter.delete()
+    return redirect('/sitter/')
     
 # def editbaby(request, id):
 #     if request.method == 'POST':
@@ -167,4 +195,9 @@ def edit_baby(request, id):
         return redirect('/baby/')
     else:
         return render(request, 'application/edit_baby.html', {'babe':babe})
+    
+def deletebaby(request, id):
+    baby = Baby.objects.get(id=id)
+    baby.delete()
+    return redirect('/baby/')
      

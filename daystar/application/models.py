@@ -18,18 +18,15 @@ class Baby(models.Model):
     age = models.CharField(max_length=255)
     gender = models.CharField(max_length=255)
     location = models.CharField(max_length=100)
-    image = models.CharField(max_length=255)
+    image = models.ImageField(max_length=255)
     broughtby = models.CharField(max_length=200)
-    timein = models.DateTimeField(auto_now=False)
+    timein = models.DateTimeField(auto_now=True)
     timeout = models.DateTimeField(auto_now=True)
     fees= models.CharField(max_length=100 , null=True, blank=True)
     parent_name = models.CharField(max_length= 200)
-    periodstay = models.CharField(max_length=20)
     babynumber = models.IntegerField(null=True)
     message_left = models.TextField(max_length=1000)
-    broughtby = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    category = models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=True, blank=True)
+    stay_duration = models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class Sitter(models.Model):
@@ -66,7 +63,7 @@ class Item(models.Model):
 #how to be able to access some paricular items/objects/attributes from this class in my views and table
 class Pay(models.Model):
     payee =  models.ForeignKey(Baby, on_delete=models.CASCADE, null=True, blank=True)
-    payment_sitter = models.ForeignKey(Sitter, on_delete=models.CASCADE, null=True, blank=True)
+    # payment_sitter = models.ForeignKey(Sitter, on_delete=models.CASCADE, null=True, blank=True)
     payment_cat= models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=True, blank=True)
     pay_number = models.IntegerField(null=True, blank=True)
     amount = models.FloatField( null=True, blank=True)

@@ -1,33 +1,54 @@
 {% extends "application/base.html" %}
 {% load static %}
 {% block content  %}
+<div class="content">
     {% if message != none %}
-        <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">{{ message }}</div>
+    <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">{{ message }}</div>
     {% endif %} 
-    
-
-    <div class="container ">
-        <div class="fill">
-            <form method="post" class="">
-                <div class="form-group p-2">
-                    <label for="formGroupExampleInput">Name</label>
-                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
-                </div>
-                  <div class="form-group p-2">
-                    <label for="formGroupExampleInput">Names</label>
-                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
-                </div>
-                <div class="form-group p-2">
-                    <label for="formGroupExampleInput">Names</label>
-                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
-                </div>
-                <div class="form-group p-2">
-                    <label for="formGroupExampleInput">Names</label>
-                    <input type="text" name="fname" class="form-control" id="formGroupExampleInput" placeholder="Enter Names" >
-                </div>
-            </form>
+    <form method="post" class="p-4 w-auto h-100 d-grid ">
+        <div class="">
+            <input type="text" name="fname" required placeholder="Enter your  First name"  class="p-2 border  ">
+            <input type="text" name="lname" placeholder="Enter your Last name"  class="p-2 border ">
         </div>
-        
-    </div>
+        <br>
+        <div class="">
+            <input type="number" name="age" required placeholder="Age"  class="p-2  ">
+            <input type="date" name="DOB" required placeholder="Date of Birth"  class="p-2 border ">
+        </div>
+        <br>
+        <div>
+            <label for="gender" class="p2 gap-2">Select Gender</label>
+            <select name="gender" id="gender" required class=" text-dark">
+                <option value="male">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <br>
+            <input type="text" name="broughtby" required placeholder="Brought in By"  class="p-2 border ">
+            <input type="text" name="parent_name" required placeholder="Parent's Name"  class="p-2 border ">
+            <input type="text" name="timein"  required  placeholder="Time In" class="p-2 border ">
+        <br>
+        <input type="text" name="location" required placeholder="Enter your Address" class="p-2 border ">
+        <br>
+        <input type="text" name="fees"  required   placeholder="Amount paid"  class="p-2 border ">
+        <br>
+        <select name="stay_duration" required  class="">
+            <option value="stayDuration">Stay Duration</option>
+            <option value="Fullday">Full Day</option>
+            <option value="halfday">Half Day</option>
+        </select>
+        <br>
+        <input type="text" name="babynumber" required placeholder="Baby number"  class="p-2 border ">
+        <input type="text" name="message_left" placeholder="Message "  class="p-2 border ">
+        <br>
+        <button type="submit" class="btn btn-secondary w-25">Add Baby</button>
+    </form>
+    
+</div>
 
-{% endblock  %} 
+
+{% endblock  %}
+
+    

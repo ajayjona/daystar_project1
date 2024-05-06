@@ -1,7 +1,37 @@
 {% extends "application/base.html" %}
 
 {% block content %}
-Welcome to the payments page!!
+<div class="content">
+    <h1>Baby Payments</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for baby in babies %}
+        <tr>
+            <td>{{ baby.fname }} {{baby.lname}} </td>
+            {% for pay in pays %}
+                {% if pay.baby == baby %}
+                <td>{{ pay.amount }}</td>
+                <td>{{ pay.date }}</td>
+                {% endif %}
+                {% endfor %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No payments yet</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
 
 
 {% endblock  %}

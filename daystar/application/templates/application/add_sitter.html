@@ -1,52 +1,52 @@
 {% extends "application/base.html" %}
 
 {% block content  %}
-{% comment %} this message refuese to display in my webbrouser saying that its not defined {% endcomment %}
+<div class="content">
     {% if message != none %}
-        <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">
-            {{ messages }}
-        </div>
-
+    <div class="bg-primary">
+        {{ messages }}
+    </div>
     {% endif %}
-
-<form method="post" class="p-4 w-1/2 flex flex-col gap-2">
-    <div class="flex  flex-row gap-2">
-        <input type="text" name="fname" required placeholder="Enter your  First name"  class="p-2 border  ">
-        <input type="text" name="lname" placeholder="Enter your Last name"  class="p-2 border ">
-    </div>
-    <div class="flex  flex-col">
-        <input type="number" name="age" required placeholder="Age"  class="p-2  ">
-        <input type="date" name="DOB" required placeholder="Date of Birth"  class="p-2 border ">
-        <label for="gender" class="p2 gap-2">Select Gender</label>
-        <select name="gender" id="gender" class=" text-white">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
-    </div>
-
-    <div> 
+    <form method="post" class="p-4 w-auto h-100 d-grid ">
+        <div class="">
+            <input type="text" name="fname" required placeholder="Enter your  First name"  class="p-2 border  ">
+            <input type="text" name="lname" placeholder="Enter your Last name"  class="p-2 border ">
+        </div>
+        <br>
+        <div class="">
+            <input type="number" name="age" required placeholder="Age"  class="p-2  ">
+            <input type="date" name="DOB" required placeholder="Date of Birth"  class="p-2 border ">
+        </div>
+        <br>
+        <div>
+            <label for="gender" class="p2 gap-2">Select Gender</label>
+            <select name="gender" id="gender" class=" text-dark bg-">
+                <option value="male"></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <br>
+            <input type="text" name="contact" placeholder="Enter your Phone number"  class="p-2 border ">
+            <input type="text" name="NIN" placeholder="Enter your Phone NIN" class="p-2 border ">
+        <br>
+        <input type="text" name="location" placeholder="Enter your Address" class="p-2 border ">
+        <br>
         <input type="email" name="email" placeholder="Enter your Email"  class="p-2 border ">
-        <input type="text" name="contact" placeholder="Enter your Phone number"  class="p-2 border ">
-        <input type="text" name="NIN" placeholder="Enter your Phone NIN" class="p-2 border ">
-    </div>
-    <input type="text" name="location" placeholder="Enter your Address" class="p-2 border ">
-    <label for="gender" class="p2 gap-2">Level Of Education</label>
-    <select name="education" id="education" class="">
-        <option value="Certificate"></option>
-        <option value="Certificate">Certificate</option>
-        <option value="bachelors">Bachelors Degree</option>
-        <option value="high_school_cert">High School Certificate</option>
-    </select>
-    <input type="text" name="educationlevel" placeholder="Enter your heighest level of education"  class="p-2 border">
-    <input type="text" name="nok" placeholder="Enter your next of keen"  class="p-2 border ">
-    <input type="text" name="recommender" placeholder="Recommender"  class="p-2 border ">
+        <br>
+        <select name="education" id="education" class="">
+            <option value="Certificate">Level Of Education</option>
+            <option value="Certificate">Certificate</option>
+            <option value="bachelors">Bachelors Degree</option>
+            <option value="high_school_cert">High School Certificate</option>
+        </select>
+        <br>
+        <input type="text" name="nok" placeholder="Enter your next of keen"  class="p-2 border ">
+        <input type="text" name="recommender" placeholder="Recommender"  class="p-2 border ">
+        <br>
+         <button type="submit" class="btn btn-secondary w-25">Add Sitter</button>
+    </form>
 
-    <button type="submit" class="p-2 rounded-lg shadow bg-teal-500 text-black-800 text-center w-1/2 align-items-center">Add Sitter</button>
-
-</form>
-
-
-
-
+</div>
 {% endblock  %}

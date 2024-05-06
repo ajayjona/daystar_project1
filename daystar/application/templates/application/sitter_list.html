@@ -33,6 +33,7 @@
                          <td>{{ sitter.sitternumber }}</td>
                          <td>{{ sitter.contact }}</td>
                          <td><a href="/sitteredit/{{ sitter.id }}">Edit</a></td>
+                         <td><a href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
                      {% endfor %}
             </tbody>
           </table>
