@@ -3,32 +3,36 @@
 {% extends "application/base.html" %}
 
 {% block content  %}
-    {% if message != none %}
-        <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">
-            {{ message }}
-        </div>
-hi edit 
-    {% endif %}   
-     {% if baby %}  
-        <form method="post" class="p-4 w-1/2 flex flex-col gap-2">
-            <input type="text" name="lname" required placeholder="{{ baby.lname }}" class="">
-            <input type="text" name="fname" required placeholder="{{ baby.fname }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="text" name="broughtby" required placeholder="{{baby.broughtby }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="number" name="Age" required placeholder="{{ baby.age }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="text" name="parent_name" required placeholder="{{baby.parent_name}}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="text" name="periodstay"required  placeholder="{{ baby.periodstay }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="time" name="timein" required placeholder="{{ baby.timein }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="text" name="babynumber" required placeholder="{{ baby.babynumber }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="text" name="address" required placeholder="{{ baby.address }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="number" name="fees" required placeholder="{{ baby.fees }}" class="p-2 border bg-gray-800 text-gray-300">
-            <input type="text"  name="message_left" placeholder="{{ baby.message_left }}" class="p-2 border bg-gray-800 text-gray-300">
-            <label for="gender"required >Select Gender</label>
-            <select name="gender" id="gender"> 
-                <option value="male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option> 
-            </select>
-            <button type="submit" class="">Edit  Baby</button>
-        </form>
-    {% endif %}
+<div class="content">
+    <h1>Edit Baby Information</h1>
+    <form method="POST" class="babe">
+        {% csrf_token %}
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname" value="{{ babe.fname }}"><br>
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname" value="{{ babe.lname }}"><br>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" value="{{ babe.gender }}"><br>
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" value="{{ babe.age }}"><br>
+        <label for="parent_name">Parent Name:</label>
+        <input type="text" id="parent_name" name="parent_name" value="{{ babe.parent_name }}"><br>
+        <label for="timein">Time In:</label>
+        <input type="text" id="timein" name="timein" value="{{ babe.timein }}"><br>
+        <label for="fees">Fees:</label>
+        <input type="text" id="fees" name="fees" value="{{ babe.fees }}"><br>
+        <label for="stay_duration">stay_duration:</label>
+        <input type="text"  name="stay_duration" value="{{ babe.stay_duration }}"><br>
+        <label for="broughtby">Brought By:</label>
+        <input type="text" id="broughtby" name="broughtby" value="{{ babe.broughtby }}"><br>
+        <label for="babynumber">Baby Number:</label>
+        <input type="text" id="babynumber" name="babynumber" value="{{ babe.babynumber }}"><br>
+        <label for="message_left">Message Left:</label>
+        <input type="text" id="message_left" name="message_left" value="{{ babe.message_left }}"><br>
+        <input type="submit" value="Update Baby Information">
+    </form>
+
+</div>
+
+    
 {% endblock  %}

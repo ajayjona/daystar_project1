@@ -4,15 +4,19 @@
 {% block content %}
 <div class="content">
     <div class="p-2 flex gap-2 justify-end ">
-        <a href="/sitter/edit/{{ id }}" class="p-2 bg-green "> Edit Baby</a>
-        <a href="/baby/delet/{{ id }}" class="p-2 bg-blue text-white">Delete Baby</a>
+        <a class="button" href="/babyedit/{{ baby.id }}">Edit</a>
+       <br><br>
+       <a class="button" href="/baby/delete/{{ baby.id }}">Delete</a>
     </div>
     <div class="w-full grid grid-cols-10 p-4">
         <div class="col-span-2 p-4">
-            <img src="https://picsum.photos/200" class="h-[200px] rounded-lg" alt="">
+            {% comment %} <img src="https://picsum.photos/200" class="h-[200px] rounded-lg" alt=""> {% endcomment %}
         </div>
         <div class="">
             <table>
+                <tr>
+                    <img src="https://picsum.photos/200" >
+                </tr>
                 <tr>
                     <th>Name: </th>
                     <td>{{ baby.fname }}  {{ baby.lname }} </td>
@@ -26,8 +30,8 @@
                     <td>{{ baby.gender }} </td>
                 </tr>
                 <tr>
-                    <th>Period of Stay: </th>
-                    <td>{{ baby.fees }} </td>
+                    <th> Stay Dutation: </th>
+                    <td> {{ baby.stay_duration }} </td>
                 </tr>
                 <tr>
                     

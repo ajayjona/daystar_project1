@@ -45,8 +45,9 @@ def addbaby(request):
         broughtby = request.POST['broughtby']
         babynumber  = request.POST['babynumber']
         message_left = request.POST['message_left']
+        stay_duration = request.POST['stay_duration']
         # Address = request.POST['address'] 
-        baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, timein=timein, fees=fees, broughtby=broughtby, babynumber=babynumber, message_left=message_left)
+        baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, timein=timein, fees=fees, broughtby=broughtby, babynumber=babynumber, message_left=message_left, stay_duration=stay_duration)
         baby.save()
         message = 'Baby added successfully'
     context = {
@@ -75,12 +76,12 @@ def addsitter(request):
 
 def viewbaby(request, id):
     baby_obj = Baby.objects.get(id = id)
-    all_pays = Pay.objects.filter(id=id)
-    cat_stay = Categorystay.objects.filter(id=id)
+    all_pays = Pay.objects.filter(payee=id)
+    stayduration = Categorystay.objects.filter(id=id)
     context = {
        'baby': baby_obj,
         'all_pays': all_pays,
-        'cat_stay': cat_stay
+        'stayduration': stayduration,
     }
     template = loader.get_template('application/view_baby.html')
     return HttpResponse(template.render(context))
@@ -133,13 +134,20 @@ def additem(request):
         # date_received = request.POST['date_recieved']
         item = Item(item_name=item_name, quantity=quantity, current_stock=current_stock)
         item.save()
-        # template = loader.get_template('application/inventory.html')
         return render(request, 'application/inventory.html')
     else:
         return render(request, 'application/add_inventory.html') 
 def settings(request):
     template = loader.get_template('application/settings.html')
     return HttpResponse(template.render())
+
+def login(request):
+    template = loader.get_template('application/login.html')
+    return HttpResponse(template.render())
+
+def logout(request):
+    request.session.flush()
+    return redirect('login')
 
 # def payments(request):
 #     payments = Pay.objects.all()
@@ -150,21 +158,22 @@ def settings(request):
 #     return HttpResponse(template.render(context))
 
 
-def payments(request):
+def payment_view(request):
     if request.method == 'POST':
         baby_id = request.POST['baby_id']
-        sitter_id = request.POST['sitter_id']
         amount = request.POST['amount']
         payment_date = request.POST['payment_date']
         baby = Baby.objects.get(id=baby_id)
-        sitter = Sitter.objects.get(id=sitter_id)
-        pay = Pay(baby=baby, sitter=sitter, amount=amount, payment_date=payment_date)
+        pay = Pay(baby=baby,  amount=amount, payment_date=payment_date)
         pay.save()
+        return redirect('payment_success')
     else:
         babies = Baby.objects.all()
         pays = Pay.objects.all()
-        template = loader.get_template('application/payments.html')
-        return HttpResponse(template.render({'babies':babies, 'pays':pays}))
+        return render(request, 'application/payments.html', {'babies':babies, 'pays':pays})
+    
+
+
 def editsitter(request, id):
     
     if request.method == 'POST':
@@ -178,24 +187,38 @@ def deletesitter(request, id):
     sitter = Sitter.objects.get(id=id)
     sitter.delete()
     return redirect('/sitter/')
-    
-# def editbaby(request, id):
-#     if request.method == 'POST':
-#         print('post successful')
-#         return redirect('/baby/')
-#     else:
-#         baby = Baby.objects.get(id=id)
-#         return render(request, 'application/edit_baby.html', {'baby':baby})
-
 
 def edit_baby(request, id):
     babe = Baby.objects.get(id = id)
     if request.method == 'POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        gender = request.POST['gender']
+        age = request.POST['age']
+        parent_name = request.POST['parent_name']
+        timein = request.POST['timein']
+        fees = request.POST['fees']
+        broughtby = request.POST['broughtby']
+        babynumber  = request.POST['babynumber']
+        message_left = request.POST['message_left']
+        # stay_duration = request.POST['stay_duration']
+        
+        babe.fname = fname
+        babe.lname = lname
+        babe.gender = gender
+        babe.parent_name = parent_name
+        babe.timein = timein
+        babe.age = age
+        babe.broughtby = broughtby
+        babe.fees = fees
+        babe.babynumber = babynumber
+        babe.message_left = message_left
+        # babe.stay_duration = stay_duration
+        babe.save()
         print('update successful')
         return redirect('/baby/')
     else:
         return render(request, 'application/edit_baby.html', {'babe':babe})
-    
 def deletebaby(request, id):
     baby = Baby.objects.get(id=id)
     baby.delete()

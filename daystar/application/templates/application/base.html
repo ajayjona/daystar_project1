@@ -53,7 +53,7 @@
             </div>
             
             <ul class="sidebar-list">
-                <a href="/">
+                <a href="/index">
                     <li class="sidebar-list-item">
                         <span class="material-icons-outlined">
                             dashboard
@@ -95,21 +95,20 @@
                     </li>
                 </a>
             </ul>
+            <button type="button" class="btn btn- text-white"><a href="{% url 'logout' %}">Logout</a></button> 
         </aside>
+
+        
         <!-- end sidebar -->
         {% block content %}
-        {% endblock  %}
-
-
-
-        
-        
+        {% endblock  %}   
 
     </div>
     <!-- footer -->
-    <div class="footer w-100 p-2 m-auto ">
+    <div class="footer ">
         <p> Copyright &copy;2024 Daystar Daycare</p>
-    </div>
+    </div> 
+
     {% comment %} <footer class="footer">
         <p> Copyright &copy;2024 Daystar Daycare</p>
     </footer> {% endcomment %}

@@ -9,9 +9,6 @@ class Categorystay(models.Model):
         return self.name
 
 
-
-
-
 class Baby(models.Model):
     fname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
@@ -26,7 +23,7 @@ class Baby(models.Model):
     parent_name = models.CharField(max_length= 200)
     babynumber = models.IntegerField(null=True)
     message_left = models.TextField(max_length=1000)
-    stay_duration = models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=True, blank=True)
+    stay_duration = models.CharField(default='Fullday', max_length=50, blank=True, null=True)
 
 
 class Sitter(models.Model):
@@ -59,16 +56,18 @@ class Item(models.Model):
     item_name = models.CharField(max_length=100)
     quantity = models.IntegerField()
     current_stock =models.CharField(max_length=50)
+    
+    
 #add sold items class
+
+
 #how to be able to access some paricular items/objects/attributes from this class in my views and table
 class Pay(models.Model):
     payee =  models.ForeignKey(Baby, on_delete=models.CASCADE, null=True, blank=True)
-    # payment_sitter = models.ForeignKey(Sitter, on_delete=models.CASCADE, null=True, blank=True)
-    payment_cat= models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=True, blank=True)
     pay_number = models.IntegerField(null=True, blank=True)
     amount = models.FloatField( null=True, blank=True)
     date = models.DateTimeField( auto_now_add=True)
-    description = models.TextField()
+    pay_status = models.BooleanField(default=1)
 
 
 

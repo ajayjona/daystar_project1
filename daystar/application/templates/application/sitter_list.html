@@ -9,10 +9,10 @@
              <input type="text" placeholder="search" class="rounded-lg ">
              <button class="p-2 bg-black text-white  rounded-lg">Search </button>
          </div>
-     
-         
-         <a class="btn btn-primary" href="/sitter/add" role="button">Add Sitter</a>
-         <table class="table text-center ">
+         <br>
+         <a class="button" href="/sitter/add" role="button">Add Sitter</a>
+         <br>
+         <table class="w-full h-50">
             <thead>
                 <tr>
                     <th>#</th>
@@ -21,6 +21,10 @@
                     <th>Sitter  Number</th>
                     <th>Contact</th>
                     <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Delete</th>
+                    <th>Delete</th>
+                    <th>Delete</th>
                    
                 </tr>
             </thead>
@@ -32,8 +36,9 @@
                          <td>{{ sitter.gender }}</td>
                          <td>{{ sitter.sitternumber }}</td>
                          <td>{{ sitter.contact }}</td>
-                         <td><a href="/sitteredit/{{ sitter.id }}">Edit</a></td>
-                         <td><a href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
+                         <td><a  class= "button " href="/sitteredit/{{ sitter.id }}">Edit</a></td>
+                         <br>
+                         <td><a class="button" href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
                      {% endfor %}
             </tbody>
           </table>

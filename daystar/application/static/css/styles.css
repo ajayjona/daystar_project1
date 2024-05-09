@@ -1,7 +1,7 @@
 body {
-    margin: 0;
+    /* margin: 0; */
     padding: 0;
-    background-color:#d8d5d5;
+    background-color:#8FBFE0;
     color: rgb(43, 42, 42);
     font-family: "montserrat", sans-serif;
 }
@@ -31,11 +31,11 @@ span {
     justify-content: space-between;
     padding: 0 30px 0 30px;
     box-shadow: 0 6px 7px rgba(0, 0, 0, 0.35);
-    background-color: hsl(220, 17%, 21%);
+    background-color: rgb(3, 94, 89);
 }
 
 .content{
-    display: flex;
+    display:flex;
     grid-area: main;
     flex-direction: column;
 }
@@ -46,11 +46,8 @@ span {
 #sidebar{
     grid-area: sidebar;
     height: 100%;
-    background-color: hsl(220, 17%, 21%);
-    overflow-y: auto;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s
-    ;
+    background-color: rgb(3, 94, 89);
+    
 
 }
 .sidebar-title{
@@ -61,12 +58,7 @@ span {
     margin-bottom: 30px;
 
 }
-/* .sidebar-brand{
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: 700; 
-    
-} */
+
 
 .sidebar-brand h3{
         text-transform: uppercase;
@@ -80,6 +72,9 @@ span {
     padding: 0;
     margin-top: 15px;
     list-style-type: none;
+    
+}
+.sidebar-list a {
     text-decoration: none;
 }
 .sidebar-list-item{
@@ -93,7 +88,7 @@ span {
 .sidebar-list-item:hover{
     background-color: rgba(179, 172, 172, 0.2);
     cursor: pointer;
-    color:blue;
+    
     
 }
 .sidebar-responsive{
@@ -104,13 +99,14 @@ span {
 
 .main-container{
     grid-area: main;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     padding: 20px 20px;
     color: rgba(187, 185, 185, 0.95);
+    
 }
 .main-title{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .main-cards{
     display: flex;
@@ -118,32 +114,33 @@ span {
     /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     gap: 20px;
     margin: 20px 0;
+    border-radius: 10px;
 }
 .card{
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 25px;
-    border-radius: 5px;
+    border-radius: 20px;
     box-shadow: #263043;
 
 }
 
 .card:first-child{
-    background-color: #2962ff;
+    background-color: #4364c0;
 }
 .card:nth-child(2){
-    background-color: #2962ff;
-    border: solid 1px #bfc3ca;
+    background-color: #4364c0;;
+    
 }
 
 .card:nth-child(3){
-    background-color:  #2962ff;
+    background-color:  #4364c0;;
 
 }
 
 .card:nth-child(4){
-    background-color:  #2962ff;
+    background-color:  #4364c0;;
 }
 .card-inner{
     display:flex;
@@ -176,19 +173,13 @@ span {
 }
 
 .footer{
-    /* grid-area: footer; */
-    height: 50px;
-    display: flex;
+    position: fixed;
+    left: 0;
     bottom: 0;
-    color: #d8d5d5;
+    width: 100%;
+    color: white;
     text-align: center;
-    /* float:center; */
-    align-items: center;
-    position: absolute;
-    justify-content: center;
-    padding: 0 30px 0 30px;
-    box-shadow: 7 6px 0px rgba(0, 0, 0, 0.35);
-    background-color: #263043;
+    background-color: hsl(220, 17%, 21%);   
 }
 .table{
     display: block;
@@ -196,11 +187,40 @@ span {
 
 .container .fill {
     display:grid;
-    margin: auto;
+    /* margin: auto; */
     height:50%;
     width: 50%;
     padding: 5px;
     background-color: #263043;
     position:absolute;
 
+}
+
+.button {
+    background-color: #4364c0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    justify-content: space-around;
+  }
+  bt
+
+  .button:hover {
+    background-color: black;
+  }
+ 
+.btn{
+    background-color:#4364c0 ;
+}
+.babe{
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+    /* height:auto; */
+    color: black;
+    
+    /* background-color:rgb(3, 94, 89); */
 }
