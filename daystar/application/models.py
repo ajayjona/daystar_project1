@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -10,6 +11,7 @@ class Categorystay(models.Model):
 
 
 class Baby(models.Model):
+   
     fname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
     age = models.CharField(max_length=255)
@@ -27,6 +29,7 @@ class Baby(models.Model):
 
 
 class Sitter(models.Model):
+    # babe = models.ForeignKey(Baby,on_delete=models.CASCADE, default=0)
     fname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
     age = models.CharField(max_length=255)
@@ -40,6 +43,7 @@ class Sitter(models.Model):
     educationlevel = models.CharField(max_length=20)
     sitternumber = models.CharField(max_length=50)
     contact = models.CharField(max_length=20, default=1)
+    status = models.BooleanField(default=True)
 
 #i cant connect my model items to my views 
 # class Item(models.Model):
@@ -63,11 +67,15 @@ class Item(models.Model):
 
 #how to be able to access some paricular items/objects/attributes from this class in my views and table
 class Pay(models.Model):
-    payee =  models.ForeignKey(Baby, on_delete=models.CASCADE, null=True, blank=True)
+    baby =  models.ForeignKey(Baby, on_delete=models.CASCADE, null=True, blank=True)
     pay_number = models.IntegerField(null=True, blank=True)
     amount = models.FloatField( null=True, blank=True)
-    date = models.DateTimeField( auto_now_add=True)
+    date = models.DateField( auto_now_add=True)
+    payee = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     pay_status = models.BooleanField(default=1)
+    
+    def __str__(self):
+        return f'payment of {self.amount} made by {self.baby.fname} on {self.date}'
 
 
 

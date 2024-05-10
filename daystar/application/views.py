@@ -63,8 +63,8 @@ def addsitter(request):
         gender = request.POST['gender']
         age = request.POST['age']
         address = request.POST['location']
-        # contact = request.POST['contact'] if i enable this contact it brings an error and also it doesnt show anyting even if you put some text in the form
-        sitter = Sitter(fname=fname, lname=lname, gender=gender, age=age, location=address)
+        contact = request.POST['contact'] 
+        sitter = Sitter(fname=fname, lname=lname, gender=gender, age=age, location=address, contact=contact)
         sitter.save()
         # messages = 'Sitter added successfully'
     # contxt = {
@@ -88,9 +88,9 @@ def viewbaby(request, id):
 
 
 def viewsitter(request,id):
-    sitter_list = Sitter.objects.get(id=id)
+    sitters = Sitter.objects.get(id=id)
     context = {
-       'sitter_list': sitter_list
+       'sitters': sitters
     }
     template = loader.get_template('application/view_sitter.html')
     return HttpResponse(template.render(context))
@@ -114,9 +114,22 @@ def sitter(request):
     template = loader.get_template('application/sitter_list.html')
     return HttpResponse(template.render(context))
 
-def payment(request):
-    template = loader.get_template('application/payments.html')
-    return HttpResponse(template.render())
+def payment(request, id):
+    if request.method == 'POST':
+        amount = request.POST['amount']
+        date = request.POST['date']
+        baby = Baby.objects.get(id = id)
+        pay = Pay(baby=baby, amount= amount, date = date )
+        pay.save()
+        return redirect('payment_success', id=id)
+    else:
+        babies = Baby.objects.all()
+        pays = Pay.objects.all()
+        return render(request, 'application/payments.html', {'babies': babies, 'pays':pays})
+    
+def payment_success(request, id):
+    baby = Baby.objects.get(id=id)
+    return render(request, 'application/payment_success.html', {'baby':baby})
 
 def inventory(request):
     items = Item.objects.all()
@@ -148,30 +161,6 @@ def login(request):
 def logout(request):
     request.session.flush()
     return redirect('login')
-
-# def payments(request):
-#     payments = Pay.objects.all()
-#     context = {
-#         'payments': payments
-#     }
-#     template = loader.get_template('application/payments.html')
-#     return HttpResponse(template.render(context))
-
-
-def payment_view(request):
-    if request.method == 'POST':
-        baby_id = request.POST['baby_id']
-        amount = request.POST['amount']
-        payment_date = request.POST['payment_date']
-        baby = Baby.objects.get(id=baby_id)
-        pay = Pay(baby=baby,  amount=amount, payment_date=payment_date)
-        pay.save()
-        return redirect('payment_success')
-    else:
-        babies = Baby.objects.all()
-        pays = Pay.objects.all()
-        return render(request, 'application/payments.html', {'babies':babies, 'pays':pays})
-    
 
 
 def editsitter(request, id):

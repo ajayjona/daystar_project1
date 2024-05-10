@@ -27,7 +27,9 @@ urlpatterns = [
     path('settings/', views.settings , name='settings'),
     
     #payments path
-    path('payments/', views.payment_view, name='payments'),
+    # path('payment/',views.payment, name='payements'),
+    path('payments/<int:id>/', views.payment, name='payments'),
+    path('payment_success/<int:id>/', views.payment_success, name = 'payment_success'),
     
     #inventory path
     path('inventory/', views.inventory, name='inventory'),

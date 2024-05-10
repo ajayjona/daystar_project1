@@ -1,66 +1,50 @@
 {% extends "application/base.html" %}
 
-{% block content %}
-<div class="content">
-    <h1>Baby Payments</h1>
- <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for pay in baby_payments %}
-        <tr>
-            <td>{{ baby.fname }} {{baby.lname}} <td>
-            <td>{{ pay.amount }}</td>
-            <td>{{ pay.payment_date }}</td>
-            {% endfor %}
-        </tr>
-    </tbody>
-</table>
-
-{% comment %} <form method="POST">
-    {% csrf_token %}
-    <label for="baby_id">Baby:</label>
-        <select name="baby_id" id="baby_id">
-            {% for baby in babies %}
-            <option value="{{ baby.id }}">{{ baby.name }}</option>
-            {% endfor %}
-        </select><br>
-        <label for="sitter_id">Sitter:</label>
-        <input type="text" name="sitter_id" id="sitter_id"><br>
-        <label for="amount">Amount:</label>
-        <input type="text" name="amount" id="amount"><br>
-        <label for="payment_date">Payment Date:</label>
-        <input type="date" name="payment_date" id="payment_date"><br>
-        <input type="submit" value="Submit">
-</form>
-
-<table border="1">
-    <thead>
-        <tr>
-            <th>Baby Name</th>
-            <th>Amount Paid</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for pay in pays %}
-        <tr>
-            <td>{{ pay.baby.name }}</td>
-            <td>{{ pay.amount }}</td>
-            <td>{% if pay.amount_paid >= pay.amount %} Cleared {% else %} Pending {% endif %}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-t {% endcomment %}
-</div>
-
-
-
+{% block content  %}
+    <div class="content">
+        {% if message != none %}
+        <div class="bg-primary">
+            {{ messages }}
+        </div>
+        {% endif %}
+        <form method="post" class="p-4 w-auto h-100 d-grid ">
+            {% csrf_token %}
+            <div class="">
+                <select name="id" id="id">
+                    {% for baby in babies %}
+                        <option value="{{ baby.id }}">{{ baby.fname }} {{ baby.lname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="">
+                <input type="number" name="amount" required placeholder="Amount"  class="p-2  ">
+            </div>
+            <br>
+            <div class="">
+                <input type="date" name="payment_date" required placeholder="Payment Date"  class="p-2 border ">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-secondary w-25">Add Payment</button>
+        </form>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Baby Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Payment Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pay in pays %}
+                    <tr>
+                        <td>{{ pay.baby.fname }} {{ pay.baby.lname }}</td>
+                        <td>{{ pay.amount }}</td>
+                        <td>{{ pay.payment_date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock  %}

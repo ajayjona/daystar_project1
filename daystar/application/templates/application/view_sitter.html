@@ -16,27 +16,28 @@
             <table>
                 <tr>
                     <th>Name</th>
-                    <td>{{ sitter.fname }}  {{ sitter.lname }}</td>
+                    <td>{{ sitters.fname }}  {{ sitters.lname }}</td>
                 </tr>
                 <tr>
                     <th>Age</th>
-                    <td>{{ sitter.age }}</td>
+                    <td>{{ sitters.age }}</td>
                 </tr>
                 <tr>
                     <th>Gender</th>
-                    <td>{{ sitter.gender }}</td>
+                    <td>{{ sitters.gender }}</td>
                 </tr>
                 <tr>
                     <th>Room </th>
-                    <td>{{ sitter.sitternumber }}</td>
+                    <td>{{ sitters.sitternumber }}</td>
                 </tr>
                 <tr>
-                    <td>{{ baby.categorystay }}</td>
+                    <th>status</th>
+                    <td>{{ sitters.status }}</td>
                 </tr>
             </table>
         </div>
     </div>
-    <h1 class="p-4">{{ sitter.lname }}'s Information</h1>
+    <h1 class="p-4">{{ sitters.lname }}'s Information</h1>
     <table class="w-full mt-4 p-4">
         <thead class="bg-black text-white">
             <tr>
