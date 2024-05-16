@@ -318,3 +318,123 @@ this is for a view of edit sitter using forms.py
 #         return render(request, 'application/edit_sitter.html', {'sitterForm':sitterForm})
 
  {% endcomment %}
+
+
+
+
+
+
+
+ {% comment %} sitter info
+ 
+ <div class="content">
+        <h1>Welcome to the sitters page!!</h1> 
+         <div class="search">
+             <input type="text" placeholder="search" class="rounded-lg ">
+             <button class="p-2 bg-black text-white  rounded-lg">Search </button>
+             <br><br>
+             <a class="button" href="/sitter/add" role="button">Add Sitter</a>
+         </div>
+         <br>
+          {% comment %} <table class="w-full h-50">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Sitter  Number</th>
+                    <th>Contact</th>
+                    <th>Edit</th>
+                    
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for sitter in sitters %}
+                     <tr>
+                         <td>{{ sitter.id }}</td>
+                         <td><a class="text-blue-500" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                         <td>{{ sitter.gender }}</td>
+                         <td>{{ sitter.sitternumber }}</td>
+                         <td>{{ sitter.contact }}</td>
+                         <td><a  class= "button " href="/sitteredit/{{ sitter.id }}">Edit</a></td>
+                         <br>
+                         <td><a class="button" href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
+                     {% endfor %}
+            </tbody>
+          </table>
+          
+             <table class="table table-responsive">
+                 <thead class="thead-dark">
+                    
+                 </thead>
+                 <tbody>
+                   
+             </table>
+
+    </div> {% endcomment %}
+ {% comment %} </div> {% endcomment %}
+
+ {% comment %} <div class="w-full h-50">
+    <p class="p-2 text-lg"> Sitters</p>
+    <table class="w-full text-center ">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Sitter  Number</th>
+                <th>Contact</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for sitter in sitters %}
+            <tr>
+                <td>{{ sitter.id }}</td>
+                <td><a class="text-blue-500" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                <td>{{ sitter.gender }}</td>
+                <td>{{ sitter.sitternumber }}</td>
+                <td>{{ sitter.contact }}</td>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+ 
+  {% endcomment %}
+ 
+ 
+ 
+
+{%  {% comment %} </div>
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                1 of 2
+              </div>
+              <div class="col">
+                <div class="charts">
+                    <div class="charts-card">
+                        <h2 class="chart-title">EVENTS</h2>
+                        <div id="bar-chart"></div>
+                    </div>
+              </div>
+            </div>
+            <div class="row">
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        1 of 2
+      </div>
+      <div class="col">
+        <div class="charts">
+            <div class="charts-card">
+                <h2 class="chart-title">EVENTS</h2>
+                <div id="bar-chart"></div>
+            </div>
+      </div>
+    </div>
+    <div class="row">{% endcomment %} 
+ 

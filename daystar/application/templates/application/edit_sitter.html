@@ -1,7 +1,53 @@
 {% extends "application/base.html" %}
 
 {% block content  %}
-        
+
+<div class="content">
+    <div class="container">
+        <h1 class="text-center">Edit Sitter's Information</h1>
+    </div>
+   
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname"  required  value="{{ sitters.fname }}"><br>
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname"  required value="{{ sitters.lname }}"><br>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender"  required value="{{ sitters.gender }}"><br>
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required  value="{{ sitters.age }}"><br>
+        <label for="parent_name">Address</label>
+        <input type="text" name="location" required  value="{{ sitters.location }}"><br>
+        <label for="timein">Next Of Keen</label>
+        <input type="text"  name="NxtoK" required  value="{{ sitters.NxtoK }}"><br>
+        <label for="fees">DOB:</label>
+        <input type="text" name="DOB"  required value="{{ sitters.DOB }}"><br>
+        <label for="stay_duration">NIN:</label>
+        <input type="text"  name="NIN"  required value="{{ sitters.NIN }}"><br>
+        <label for="broughtby">Recommended By:</label>
+        <input type="text"  name="recommender" required  value="{{ sitters.recommender }}"><br>
+        <label for="babynumber">Level of Education:</label>
+        <select name="educationlevel" id="educationlevel">
+             <option value="">{{ sitters.educationlevel }}</option>
+            <option value="Certificate">Certificate</option>
+            <option value="bachelors">Bachelors Degree</option>
+            <option value="high_school_cert">High School Certificate</option> 
+        </select>
+        <br>
+        <label for="sitternumber">sitternumber:</label>
+        <input type="text"  name="sitternumber" required  value="{{ sitters.sitternumber}}"><br>
+        <label for="contact">contact:</label>
+        <input type="text"  name="contact" required  value="{{ sitters.contact}}"><br>
+        <label for="status">status:</label>
+        <input type="checkbox" class="w-50 " name="status" required  value="{{ sitters.status}}"><br>
+        {% comment %} <input type="submit" value="Update sitter Information"> {% endcomment %}
+        <button type="submit" class="button w-25">Update Sitter Information</button>
+        <br>
+    </form>
+
+</div>
+{% comment %}         
     {% if message != none %}
         <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">
             {{ messages }}
@@ -36,5 +82,5 @@
             <button type="submit" class="p-2 rounded-lg shadow bg-teal-500 text-black-800 text-center w-1/2 align-items-center">Edit Sitter</button>
 
         </form>
-    {% endif %}
+    {% endif %} {% endcomment %}
 {% endblock  %}

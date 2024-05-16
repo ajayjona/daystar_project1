@@ -2,23 +2,26 @@
 
 {% block content  %}
 <div class="content">
-    {% if message != none %}
+    {% comment %} {% if message != none %}
     <div class="bg-primary">
         {{ messages }}
+    </div> {% endcomment %}
+   
+    {% comment %} {% endif %} {% endcomment %}
+    <div class="container">
+        <h1 class="text-center"> Register Sitter </h1>
     </div>
-    {% endif %}
-    <form method="post" class="p-4 w-auto h-100 d-grid ">
-        <div class="">
+    <form method="post" class="form">
+        {% csrf_token %}
+        <br>
             <input type="text" name="fname" required placeholder="Enter your  First name"  class="p-2 border  ">
+            <br>
             <input type="text" name="lname" placeholder="Enter your Last name"  class="p-2 border ">
-        </div>
         <br>
-        <div class="">
             <input type="number" name="age" required placeholder="Age"  class="p-2  ">
+            <br>
             <input type="date" name="DOB" required placeholder="Date of Birth"  class="p-2 border ">
-        </div>
         <br>
-        <div>
             <label for="gender" class="p2 gap-2">Select Gender</label>
             <select name="gender" id="gender" class=" text-dark bg-">
                 <option value="male"></option>
@@ -26,7 +29,6 @@
                 <option value="female">Female</option>
                 <option value="other">Other</option>
             </select>
-        </div>
         <br>
             <input type="text" name="contact" placeholder="Enter your Phone number"  class="p-2 border ">
             <input type="text" name="NIN" placeholder="Enter your Phone NIN" class="p-2 border ">
@@ -35,7 +37,7 @@
         <br>
         <input type="email" name="email" placeholder="Enter your Email"  class="p-2 border ">
         <br>
-        <select name="education" id="education" class="">
+        <select name="educationlevel" id="educationlevel" class="">
             <option value="Certificate">Level Of Education</option>
             <option value="Certificate">Certificate</option>
             <option value="bachelors">Bachelors Degree</option>
@@ -43,11 +45,14 @@
         </select>
         <br>
         <input type="text" name="nok" placeholder="Enter your next of keen"  class="p-2 border ">
-        <input type="text" name="recommender" placeholder="Recommender"  class="p-2 border ">
-        <input type="text" name="sitternumber" placeholder="Sitter's Room number"  class="p-2 border ">
-        <input type="checkbox" name="status" placeholder="Status"  class="p-2 border ">
         <br>
-         <button type="submit" class="btn btn-secondary w-25">Add Sitter</button>
+        <input type="text" name="recommender" placeholder="Recommender"  class="p-2 border ">
+        <br>
+        <input type="text" name="sitternumber" placeholder="Sitter's Room number"  class="p-2 border ">
+        <br>
+        <input type="checkbox" name="status" placeholder="Status"  class="p-2 border ">
+         <button type="submit" class="button w-25">Add Sitter</button>
+         <br>
     </form>
 
 </div>

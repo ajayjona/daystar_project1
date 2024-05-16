@@ -4,9 +4,13 @@
 
 {% block content  %}
 <div class="content">
-    <h1>Edit Baby Information</h1>
-    <form method="POST" class="babe">
+    <div class="container">
+        <h1 class="text-center">Edit Baby Information</h1>
+    </div>
+   
+    <form method="POST" class=" form">
         {% csrf_token %}
+        <br>
         <label for="fname">First Name:</label>
         <input type="text" id="fname" name="fname" value="{{ babe.fname }}"><br>
         <label for="lname">Last Name:</label>
@@ -29,7 +33,9 @@
         <input type="text" id="babynumber" name="babynumber" value="{{ babe.babynumber }}"><br>
         <label for="message_left">Message Left:</label>
         <input type="text" id="message_left" name="message_left" value="{{ babe.message_left }}"><br>
-        <input type="submit" value="Update Baby Information">
+        {% comment %} <input type="submit" value="Update Baby Information"> {% endcomment %}
+        <button type="submit" class="button w-25">Update Baby Information</button>
+        <br>
     </form>
 
 </div>

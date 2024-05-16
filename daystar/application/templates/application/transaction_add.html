@@ -1,0 +1,67 @@
+{% extends "application/base.html" %}
+
+{% block content %}
+<div class="bodycont">
+
+    <div class="form-container">
+
+        <form method="POST" class="form" oninput="calculateTotal()">
+            
+                    <h5>Record Transaction</h5>
+                    {% csrf_token %}
+                    <label for="item">Doll :</label>
+                    <select class="choices" name="doll_name" id="doll_name">
+                        {% for item in items %}
+                            <option value="{{ item.id }}">{{ item.doll_name }}</option>
+                        {% endfor %}
+                    </select><br><br>
+
+                    <label for="transaction_type">Transaction Type:</label>
+                    <select class="choices" name="transaction_type" id="transaction_type">
+                        <option value="BUY">Buy</option>
+                        <option value="SELL">Sell</option>
+                    </select><br><br>
+                    
+                    <label for="transaction_date">Transaction date:</label>
+                    <input type="date" name="transaction_date" id="transaction_date"><br><br>
+                    
+                    
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="transaction_quantity" id="transaction_quantity"><br><br>
+
+                    <label for="paymentby">Payment Date:</label>
+                    <input type="text" name="paymentby" id="paymentby"><br><br>
+
+                    <label for="unit_price"> Unit Price:</label>
+                    <input type="number" name="unit_price" id="unit_price"><br><br>
+
+                    <label for="total_price">Shop Total Amount:</label>
+                    <input type="number" name="total_price" id="total_price" readonly><br><br>
+                    
+                    <button type="submit" class="submit-button">Submit</button>
+            
+            
+        </form>
+        <div style=" display:grid; grid-template-columns: 1fr 1fr 1fr; column-gap:20px; row-gap:20px; ">
+            {% if message != None %}
+            <div style="background-color:orange;grid-column: 2; ">
+                <h5> {{shopitem_name}} </h5>
+                <p> {{ message}}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    <script>
+        function calculateTotal() {
+            var unitPrice = document.getElementById('shopunit_price').value;
+            var quantity = document.getElementById('quantity').value;
+            var totalPrice = unitPrice * quantity;
+            document.getElementById('shoptotal_price').value = totalPrice;
+        }
+    </script>
+
+
+
+
+{% endblock content %}

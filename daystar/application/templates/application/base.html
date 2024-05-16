@@ -38,6 +38,7 @@
                         <span class="material-icons-outlined">
                             account_circle </span>
             </div>
+            <button type="button" class="button text-white"><a href="{% url 'logout' %}">Logout</a></button> 
         </header>
  <!-- end header -->
 
@@ -87,20 +88,20 @@
                             payments</span> Payments
                     </li>
                 </a>
-                <a href="/settings">
+                <a href="/doll_list">
                     <li class="sidebar-list-item">
                         <span class="material-icons-outlined">
                             settings
-                            </span>Settings
+                            </span>Doll Store
                     </li>
                 </a>
             </ul>
-            <button type="button" class="btn btn- text-white"><a href="{% url 'logout' %}">Logout</a></button> 
+           
         </aside>
-        <div class="footer ">
+        {% comment %} <div class="footer ">
             <p> Copyright &copy;2024 Daystar Daycare</p>
         </div> 
-    
+     {% endcomment %}
         
         <!-- end sidebar -->
         {% block content %}

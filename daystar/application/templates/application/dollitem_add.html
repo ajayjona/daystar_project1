@@ -1,0 +1,37 @@
+{% extends "application/base.html" %}
+
+{% block content  %}
+<div class="bodycont">
+
+    <div class="form-container">
+        <button><a href="{% url 'doll_add' %}"></a> add item</button>
+        <form method="POST" class="form" action="">
+                   <h5>Add Item</h5>
+            
+                    <label for="item_name" class="required">Item name:</label>
+                    <input type="text" id="item_name" name="item_name" required>
+                    <br>
+                    <label for="item_description" class="required">Item description:</label>
+                    <input type="text" id="item_description" name="item_description" required>
+                    <br>
+                     <label for="item_quantity" class="required">Stock quantity:</label>
+                    <input type="number" id="item_quantity" name="item_quantity"  value="0" readonly> 
+                    <br> 
+                     {% comment %} <label for="dateadded" class="required">Date added to list:</label>
+                    <input type="date" id="dateadded" name="dateadded" required >  {% endcomment %}
+
+                    <button type="submit" class="submit-button">Submit</button>
+        </form>
+        <div style=" display:grid; grid-template-columns: 1fr 1fr 1fr; column-gap:20px; row-gap:20px; ">
+            {% if message != None %}
+            <div style="background-color:orange;grid-column: 2; ">
+                <h5> {{item_name}} </h5>
+                <p> {{ message}}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+
+{% endblock  %}

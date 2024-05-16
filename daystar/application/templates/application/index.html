@@ -1,62 +1,132 @@
 {% extends "application/base.html" %}
 {% load static %}
+<H1> Welcome To The Admin Dashboard</H1>
 
 {% block content  %}
+ {% comment %} {% if user.is_authenticated %}
+    <h1>Welcome {{ first_name }}</h1>
+    <h2>You are successfully Logged in!</h2>
+    {% else %}
+    <h1>You are not Logged in!</h1>
+    {% endif %}  {% endcomment %}
 
         <!-- main -->
-        <main class="main-container">
-            <div class="main-cards">
-                <div class="card">
-                    <div class="card-inner text-white">
-                        <h3 class="text-white">BABIES</h3>
-                        <span class="material-icons-outlined">child_care</span>
-                    </div>
-                    <h1 class = "text-center">{{ count_babies }}</h1>
+    <main class="main-container">
+        <div class="main-cards">
+            <div class="card">
+                <div class="card-inner text-white">
+                    <h3 class="text-white"> BABIES</h3>
+                    <span class="material-icons-outlined">child_care</span>
                 </div>
-
-                <div class="card">
-                    <div class="card-inner text-white">
-                        <h3 class="text-white">SITTERS</h3>
-                        <span class="material-icons-outlined">
-                            groups
-                            </span>
-                    </div>
-                    <h1 class="text-center">{{ count_sitters }}</h1>
-                </div>
-
-                <div class="card border border-secondary ">
-                    <div class="card-inner text-white">
-                        <h3 class="text-white">ITEMS</h3>
-                        <span class="material-icons-outlined border border-secondary">
-                            inventory
-                            </span>
-                    </div>
-                    <h1 class = "text-center">{{ count_items }}</h1>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner text-white">
-                        <h3 class="text-white">PAYMENTS</h3>
-                        <span class="material-icons-outlined">
-                            payments
-                            </span>
-                    </div>
-                    <h1 class = "text-center">{{ count_payments }}</h1>
-                </div>
-
-            </div>
-         <div class="charts">
-            <div class="charts-card">
-                <h2 class="chart-title">EVENTS</h2>
-                <div id="bar-chart"></div>
+                <h1 class = "text-center">{{ count_babies }}</h1>
             </div>
 
-            <div class="charts-card">
-                <h2 class="chart-title">Doll Purchase and Sales Orders</h2>
-                <div id="area-chart"></div>
+            <div class="card">
+                <div class="card-inner text-white">
+                    <h3 class="text-white"> SITTERS</h3>
+                    <span class="material-icons-outlined">
+                        groups
+                        </span>
+                </div>
+                <h1 class="text-center">{{ count_sitters }}</h1>
             </div>
-         </div>
 
-        </main>
+            <div class="card border border-secondary ">
+                <div class="card-inner text-white">
+                    <h3 class="text-white">Dolls</h3>
+                    <span class="material-icons-outlined border border-secondary">
+                        inventory
+                        </span>
+                </div>
+                <h1 class = "text-center">{{ count_items }}</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-inner text-white">
+                    <h3 class="text-white">PAYMENTS</h3>
+                    <span class="material-icons-outlined">
+                        payments
+                        </span>
+                </div>
+                <h1 class = "text-center">{{ count_payments }}</h1>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="search">
+                {% comment %} <input type="text" placeholder="search" class="rounded ">
+                <button class=" bg-secondary text-white  rounded">Search </button> {% endcomment %}
+                <br><br>
+                <a class="button" href="/sitter/add" role="button">Add Sitter</a>
+                <a class="button" href="/baby/add" role="button">Add Baby</a>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-dark" >Recent Babies</h2>
+                    <table class="table h-100 w-100 text-center">
+                        <thead class=" text-white text-center">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Time In</th>
+                                <th>Baby Number</th>
+                                <th>Stay Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            {% for baby in recent_babies %}
+                            <tr>
+                                <td>{{ baby.id }}</td>
+                                <td><a class="text-primary text-decoration-none" href="/baby/view/{{ baby.id }}">{{ baby.fname }}  {{ baby.lname }}</a></td>
+                                <td>{{baby.age}}</td>
+                                <td>{{ baby.gender }}</td>
+                                <td>{{ baby.timein }}</td>
+                                <td>{{baby.babynumber}}</td>
+                                <td>{{ baby.stay_duration }}</td>
+                                <td></td>
+                            </tr>
+                            
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <h2 class="text-dark" >Recent Sitters</h2>
+                    <table class=" table w-100 h-100 text-dark text-center">
+                        <thead class="text-white  text-center w-100">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Sitter Number</th>
+                                <th>Status</th>
+                                <th>Contact</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sitter in recent_sitters %}
+                            <tr>
+                                <td>{{ sitter.id }}</td>
+                                <td><a class="text-primary text-decoration-none " href="/sitter/view/{{ sitter.id }}">{{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                                <td>{{sitter.age}}</td>
+                                <td>{{ sitter.gender }}</td>
+                                <td>{{sitter.sitternumber}}</td>
+                                <td>{{ sitter.status }}</td>
+                                <td>{{ sitter.contact }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    
+
+    </main>
           <!-- end main -->
 {% endblock  %}

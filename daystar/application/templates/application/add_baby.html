@@ -2,51 +2,50 @@
 {% load static %}
 {% block content  %}
 <div class="content">
-    {% if message != none %}
-    <div class="p-2 bg-green-500 text-white rounded-lg shadow-lg">{{ message }}</div>
-    {% endif %} 
-    <form method="post" class="p-4 w-auto h-100 d-grid ">
-        <div class="">
-            <input type="text" name="fname" required placeholder="Enter your  First name"  class="p-2 border  ">
-            <input type="text" name="lname" placeholder="Enter your Last name"  class="p-2 border ">
-        </div>
-        <br>
-        <div class="">
-            <input type="number" name="age" required placeholder="Age"  class="p-2  ">
-            <input type="date" name="DOB" required placeholder="Date of Birth"  class="p-2 border ">
-        </div>
-        <br>
-        <div>
-            <label for="gender" class="p2 gap-2">Select Gender</label>
-            <select name="gender" id="gender" required class=" text-dark">
-                <option value="male">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-        <br>
-            <input type="text" name="broughtby" required placeholder="Brought in By"  class="p-2 border ">
-            <input type="text" name="parent_name" required placeholder="Parent's Name"  class="p-2 border ">
-            <input type="text" name="timein"  required  placeholder="Time In" class="p-2 border ">
-        <br>
-        <input type="text" name="location" required placeholder="Enter your Address" class="p-2 border ">
-        <br>
-        <input type="text" name="fees"  required   placeholder="Amount paid"  class="p-2 border ">
-        <br>
-        <select name="stay_duration" required  class="">
-            <option>Stay Duration</option>
-            <option value="Fullday">Full Day</option>
-            <option value="Halfday">Half Day</option>
-        </select>
-        <br>
-        <input type="text" name="babynumber" required placeholder="Baby number"  class="p-2 border ">
-        <input type="text" name="message_left" placeholder="Message "  class="p-2 border ">
-        <br>
-        <button type="submit" class="btn btn-secondary w-25">Add Baby</button>
-    </form>
-    
+    <div class="container">
+        <h1 class="text-center">Register Baby</h1>
+    </div>
+        {% if message != none %}
+        <div class="p-2 text-white rounded-lg shadow-lg">{{ message }}</div>
+        {% endif %} 
+        <form method="post" class="form ">
+            {% csrf_token %}
+            <br>
+                <input type="text" name="fname" required placeholder="Enter your  First name"  class="p-2 border ">
+                <br>
+                <input type="text" name="lname" placeholder="Enter your Last name"  class="p-2 border ">
+            <br>
+                <input type="number" name="age" required placeholder="Age"  class="p-2  ">
+                <br>
+                <input type="date" name="DOB" required placeholder="Date of Birth"  class="p-2 border ">
+            <br>
+                <label for="gender" class="p2 gap-2">Select Gender</label>
+                <select name="gender" id="gender" required class=" text-dark">
+                    <option value="male">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            <br>
+                <input type="text" name="broughtby" required placeholder="Brought in By"  class="p-2 border ">
+                <br>
+                <input type="text" name="parent_name" required placeholder="Parent's Name"  class="p-2 border ">
+                <br>
+                <input type="text" name="timein"  required  placeholder="Time In" class="p-2 border ">
+            <br>
+            <input type="text" name="location" required placeholder="Enter your Address" class="p-2 border ">
+            <br>
+            <input type="text" name="babynumber" required placeholder="Baby number"  class="p-2 border ">
+            <br>
+            <input type="text" name="message_left" placeholder="Message "  class="p-2 border ">
+            <br>
+            <button type="submit" class="button w-25">Add Baby</button>
+        </form>
+        
+
 </div>
+
+
 
 
 {% endblock  %}

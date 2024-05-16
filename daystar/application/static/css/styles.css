@@ -1,5 +1,5 @@
 body {
-    /* margin: 0; */
+    margin: 0;
     padding: 0;
     background-color:#8FBFE0;
     color: rgb(43, 42, 42);
@@ -35,9 +35,11 @@ span {
 }
 
 .content{
-    display:flex;
+    display:grid;
     grid-area: main;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
 .menu-icon{
@@ -99,14 +101,14 @@ span {
 
 .main-container{
     grid-area: main;
-    /* overflow-y: auto; */
+    overflow-y: auto;
     padding: 20px 20px;
     color: rgba(187, 185, 185, 0.95);
     
 }
 .main-title{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-aroun;
 }
 .main-cards{
     display: flex;
@@ -127,20 +129,20 @@ span {
 }
 
 .card:first-child{
-    background-color: #4364c0;
+    background-color:#643960fa;
 }
 .card:nth-child(2){
-    background-color: #4364c0;;
+    background-color:#643960fa;
     
 }
 
 .card:nth-child(3){
-    background-color:  #4364c0;;
+    background-color:  #643960fa;
 
 }
 
 .card:nth-child(4){
-    background-color:  #4364c0;;
+    background-color: #643960fa;
 }
 .card-inner{
     display:flex;
@@ -173,7 +175,7 @@ span {
 }
 
 .footer{
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -183,8 +185,30 @@ span {
 }
 .table{
     display: block;
+    border: solid 1px  gray;
+    border-collapse: collapse;
+    background-color:#c9f3f1;
+    /* width: 100%; */
+    /* height: auto; */
+    
+}
+table thead{
+    background-color:#035E59;
+    justify-content: space-between;
+    text-align: center;
 }
 
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    margin: 4px;
+    width: auto;
+    height:auto;
+    background-color:#c9f3f1;
+    /* align-content: center; */
+    
+}
 .container .fill {
     display:grid;
     /* margin: auto; */
@@ -197,7 +221,7 @@ span {
 }
 
 .button {
-    background-color: #4364c0;
+    background-color: #643960fa;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -205,22 +229,23 @@ span {
     border-radius: 10px;
     text-decoration: none;
     justify-content: space-around;
+    
   }
-  bt
 
   .button:hover {
-    background-color: black;
+    color: antiquewhite;
+    background-color:#035E59;
   }
  
 .btn{
-    background-color:#4364c0 ;
+    background-color:#29274C ;
 }
 .babe{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    
     /* width: 100%; */
     /* height:auto; */
     color: black;
     
-    /* background-color:rgb(3, 94, 89); */
+    background-color:rgb(3, 94, 89);
 }

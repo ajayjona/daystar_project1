@@ -1,0 +1,17 @@
+{% extends "application/base.html" %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Payment Successful!</h1>
+    <p>Thank you for your payment for baby {{ baby.name }}.</p>
+    <a href="{% url 'payments' %}">Return to Payments</a>
+</div>
+{% comment %} <h1>Payment Successful!</h1>
+<p>Thank you for your payment for baby {{ baby.name }}.</p>
+
+    <!-- Add more attributes as needed -->
+</ul> {% endcomment %}
+
+
+{% endblock  %}

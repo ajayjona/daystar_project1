@@ -7,10 +7,11 @@
             {{ messages }}
         </div>
         {% endif %}
-        <form method="post" class="p-4 w-auto h-100 d-grid ">
+        <form method="POST" class="p-4 w-auto h-100 d-grid ">
             {% csrf_token %}
             <div class="">
-                <select name="id" id="id">
+                <select name="id">
+                    <option value="">Select Baby</option>
                     {% for baby in babies %}
                         <option value="{{ baby.id }}">{{ baby.fname }} {{ baby.lname }}</option>
                     {% endfor %}
@@ -18,11 +19,25 @@
             </div>
             <br>
             <div class="">
-                <input type="number" name="amount" required placeholder="Amount"  class="p-2  ">
+                <select name="amount"  >
+                    <option value="">Select Amount</option>
+                    <option value="10000">10,000</option>
+                    <option value="15000">15,000</option>
+                    <option value="100000">100,000</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <select name="category" >
+                    <option value="">Period of Stay</option>
+                    <option value="halfday">Half Day</option>
+                    <option value="fullday">Full Day</option>
+                </select>
             </div>
             <br>
             <div class="">
-                <input type="date" name="payment_date" required placeholder="Payment Date"  class="p-2 border ">
+                <input type="date" name="date" required placeholder="Payment Date"  class="p-2 border ">
+                
             </div>
             <br>
             <button type="submit" class="btn btn-secondary w-25">Add Payment</button>
@@ -34,6 +49,7 @@
                     <th scope="col">Baby Name</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Payment Date</th>
+                    <th scope="col">Stay Duration</th> 
                 </tr>
             </thead>
             <tbody>
@@ -41,7 +57,8 @@
                     <tr>
                         <td>{{ pay.baby.fname }} {{ pay.baby.lname }}</td>
                         <td>{{ pay.amount }}</td>
-                        <td>{{ pay.payment_date }}</td>
+                        <td>{{ pay.date }}</td>
+                        <td>{{ pay.stay_duration }}</td> 
                     </tr>
                 {% endfor %}
             </tbody>

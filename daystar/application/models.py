@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 # Create your models here.
 
@@ -11,7 +13,6 @@ class Categorystay(models.Model):
 
 
 class Baby(models.Model):
-   
     fname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
     age = models.CharField(max_length=255)
@@ -25,11 +26,20 @@ class Baby(models.Model):
     parent_name = models.CharField(max_length= 200)
     babynumber = models.IntegerField(null=True)
     message_left = models.TextField(max_length=1000)
-    stay_duration = models.CharField(default='Fullday', max_length=50, blank=True, null=True)
-
+    stay_duration = models.CharField(choices=(('fullday','fullday'),('halfday', 'halfday')), max_length=50, blank=True, null=True)
+   
+    
+# class daily_operations(models.Model):
+    # baby = models.ForeignKey(Baby, on_delete=models.CASCADE)
+    # date = 
+    # timein= 
+    # timeout
+    # brought _by
+    # stay_duration
+    # fees
+    # sitter= sitter id
 
 class Sitter(models.Model):
-    # babe = models.ForeignKey(Baby,on_delete=models.CASCADE, default=0)
     fname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
     age = models.CharField(max_length=255)
@@ -43,18 +53,8 @@ class Sitter(models.Model):
     educationlevel = models.CharField(max_length=20)
     sitternumber = models.CharField(max_length=50)
     contact = models.CharField(max_length=20, default=1)
-    status = models.BooleanField(default=True)
-
-#i cant connect my model items to my views 
-# class Item(models.Model):
-#     dolls = models.CharField(max_length=50)
-#     toys = models.CharField(max_length=50)
-#     milk = models.CharField(max_length=50)
-#     daipers = models.CharField(max_length=50)
-#     babyfood = models.CharField(max_length=50)
-#     fruits = models.CharField(max_length=50)
-#     date_recieved = models.DateField()
-
+    status = models.BooleanField(default=0)
+    sit = models.ForeignKey(Baby, on_delete=models.SET_NULL, null=True, related_name='sitters')
 
 class Item(models.Model):
     item_name = models.CharField(max_length=100)
@@ -71,12 +71,35 @@ class Pay(models.Model):
     pay_number = models.IntegerField(null=True, blank=True)
     amount = models.FloatField( null=True, blank=True)
     date = models.DateField( auto_now_add=True)
-    payee = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    pay_status = models.BooleanField(default=1)
+    # payee = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    # stay_duration = models.IntegerField(default=1, null=True)
+    # pay_status = models.BooleanField(default=0)
     
     def __str__(self):
         return f'payment of {self.amount} made by {self.baby.fname} on {self.date}'
-
+    
+    
+class Doll_item(models.Model):
+    item_name = models.CharField(max_length=100)
+    item_description = models.CharField(max_length=100)
+    item_quantity = models.IntegerField(default=0)
+    date_added = models.DateField(default=timezone.now)
+     
+    def __str__(self):
+        return self.item_name
+    
+class Doll_transction(models.Model):
+    doll_name = models.ForeignKey(Doll_item, on_delete=models.SET_NULL, null=True, blank=True)
+    transaction_type = models.CharField(max_length=100, choices=(('buy', 'buy'),('sell', 'sell')))
+    transaction_quantity = models.IntegerField(default=0)
+    transaction_date = models.DateField(auto_now_add=True)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    def __str__(self):
+        return f'{self.doll_name} {self.transaction_type} {self.transaction_quantity} on {self.transaction_date}'
+    
+    
 
 
 

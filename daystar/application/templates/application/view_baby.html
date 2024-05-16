@@ -30,7 +30,7 @@
                     <td>{{ baby.gender }} </td>
                 </tr>
                 <tr>
-                    <th> Stay Dutation: </th>
+                    <th> Stay Dutation:   </th>
                     <td> {{ baby.stay_duration }} </td>
                 </tr>
                 <tr>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <h1 class="p-4">{{ baby.fname }}'s Information</h1>
-    <table class="w-full mt-4 p-4">
+    {% comment %} <table class="w-full mt-4 p-4">
         <thead class="bg-black text-white">
             <tr>
                 <th>#</th>
@@ -63,6 +63,6 @@
             </tr>
             {% endfor %}
         </tbody>
-    </table>
+    </table> {% endcomment %}
 </div>
 {% endblock  %}

@@ -1,85 +1,54 @@
 {% extends "application/base.html" %}
 
 {% block content %}
-
 <div class="content">
-    <div class="container">
-        <h1>Welcome to the sitters page!!</h1> 
-         <div class="search">
-             <input type="text" placeholder="search" class="rounded-lg ">
-             <button class="p-2 bg-black text-white  rounded-lg">Search </button>
-         </div>
-         <br>
-         <a class="button" href="/sitter/add" role="button">Add Sitter</a>
-         <br>
-         <table class="w-full h-50">
-            <thead>
+    <div class="container-fluid">
+        <h1 class="text-center">All Sitters</h1>
+        <br>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search sitter Name">
+            <span class="input-group-text" id="basic-addon2">Search Sitter Name</span>
+          </div>
+        <br> 
+        <a class="button" href="/sitter/add" role="button">Add sitter</a>
+        <br>  <br>  
+        <br>  <br>       
+        <h2>Sitter List </h2>
+        <br>
+
+        <table class="w-100 h-50 text-center ">
+            <thead class=" text-white">
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Age</th>
                     <th>Gender</th>
-                    <th>Sitter  Number</th>
+                    <th>Sitter number</th>
                     <th>Contact</th>
+                    <th>Status</th>
                     <th>Edit</th>
                     <th>Delete</th>
-                    <th>Delete</th>
-                    <th>Delete</th>
-                    <th>Delete</th>
-                   
                 </tr>
             </thead>
             <tbody>
                 {% for sitter in sitters %}
-                     <tr>
-                         <td>{{ sitter.id }}</td>
-                         <td><a class="text-blue-500" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
-                         <td>{{ sitter.gender }}</td>
-                         <td>{{ sitter.sitternumber }}</td>
-                         <td>{{ sitter.contact }}</td>
-                         <td><a  class= "button " href="/sitteredit/{{ sitter.id }}">Edit</a></td>
-                         <br>
-                         <td><a class="button" href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
-                     {% endfor %}
+                    <tr>
+                        <td>{{ sitter.id }}</td>
+                        <td><a class="text-blue text-decoration-none" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                        <td>{{ sitter.age }}</td>
+                        <td>{{ sitter.gender }}</td>
+                        <td>{{ sitter.sitternumber }}</td>
+                        <td>{{ sitter.contact }}</td>
+                        <td>{{ sitter.status }}</td>
+                        <td> <a class="button" href="/sitteredit/{{ sitter.id }}">Edit</a> </td>
+                        <td><a class="button" href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
+                    </tr>
+                {% endfor %} 
             </tbody>
-          </table>
-          
-             <table class="table table-responsive">
-                 <thead class="thead-dark">
-                    
-                 </thead>
-                 <tbody>
-                   
-             </table>
-
+        </table> 
     </div>
-    {% comment %} </div> {% endcomment %}
+     
+    
 
-    {% comment %} <div class="w-ful">
-        <p class="p-2 text-lg">Recent Sitters</p>
-        <table class="w-full text-center ">
-            <thead class="bg-gray-800 p-4 m-2">
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Sitter  Number</th>
-                    <th>Contact</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                {% for sitter in sitters %}
-                <tr>
-                    <td>{{ sitter.id }}</td>
-                    <td><a class="text-blue-500" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
-                    <td>{{ sitter.gender }}</td>
-                    <td>{{ sitter.sitternumber }}</td>
-                    <td>{{ sitter.contact }}</td>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div> {% endcomment %}
 </div>
-
-
 {% endblock  %}

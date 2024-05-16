@@ -2,51 +2,53 @@
 
 {% block content %}
     <div class="content">
-      
-        <div class="container">
-            <h1>All Babies</h1>
+        <div class="container-fluid ">
+            <h1 class="text-center">All Babies</h1>
             <br>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Search Baby">
                 <span class="input-group-text" id="basic-addon2">Search Baby</span>
               </div>
             <br> 
-            <a class="btn btn-primary" href="/baby/add" role="button">Add Baby</a>
-            <br>           
-            <p class="p-2 text-lg">All Babies</p>
+            <a class="button" href="/baby/add" role="button">Add Baby</a>
+            <br>  <br>  
+            <br>  <br>         
+            <h2>Baby List</h2>
             <br>
+
+            <table class="w-100 h-50  text-center">
+                <thead class=" text-white">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Stay Duration</th>
+                        <th>Time in</th>
+                        <th>Message</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for baby in babies %}
+                        <tr>
+                            <td>{{ baby.id }}</td>
+                            <td><a class="text-blue-500" href="/baby/view/{{ baby.id}}"> {{ baby.fname }}  {{ baby.lname }}</a></td>
+                            <td>{{ baby.age }}</td>
+                            <td>{{ baby.gender }}</td>
+                            <td>{{ baby.stay_duration }}</td>
+                            <td>{{ baby.timein }}</td>
+                            <td>{{ baby.message_left }}</td>
+                            <td><a class="button" href="/babyedit/{{ baby.id }}">Edit</a></td>
+                            <td><a class="button" href="/baby/delete/{{ baby.id }}">Delete</a></td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table> 
         </div>
          
-        <table class="w-full h-50  ">
-            <thead class="bg-dark text-white">
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Stay Duration</th>
-                    <th>Time in</th>
-                    <th>Message</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for baby in babies %}
-                    <tr>
-                        <td>{{ baby.id }}</td>
-                        <td><a class="text-blue-500" href="/baby/view/{{ baby.id}}"> {{ baby.fname }}  {{ baby.lname }}</a></td>
-                        <td>{{ baby.age }}</td>
-                        <td>{{ baby.gender }}</td>
-                        <td>{{ baby.stay_duration }}</td>
-                        <td>{{ baby.timein }}</td>
-                        <td>{{ baby.message_left }}</td>
-                        <td><a class="button" href="/babyedit/{{ baby.id }}">Edit</a></td>
-                        <td><a class="button" href="/baby/delete/{{ baby.id }}">Delete</a></td>
-                    </tr>
-                {% endfor %} 
-            </tbody>
-        </table> 
+       
 
     </div>
 

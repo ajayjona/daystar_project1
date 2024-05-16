@@ -1,0 +1,44 @@
+{% extends "application/base.html" %}
+
+{% block content %}
+    <!-- Table presentation -->
+    <div style="margin-top: 80px; padding-bottom: 100px;">
+        <table class="babylist_table">
+            <table border="1">
+                <thead>
+                    <tr><a href="{% url 'add_transaction' %}">
+                        <button style="background-color: beige; border-radius:5px; color:#83190de3"> add Transaction</button>
+                    </a> 
+                        <th>Transaction id</th>
+                        <th>Item</th>
+                        <th>Transaction Type</th>
+                        <th>Quantity</th>
+                        <th>Transaction Date</th>
+                        <th>Payment By</th>
+                        <th>Shop Unit Price</th>
+                        <th>Shop Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.id }}</td>
+                        <td>{{ transaction.item.doll_name }}</td>
+                        <td>{{ transaction.transaction_type }}</td>
+                        <td>{{ transaction.transaction_quantity }}</td>
+                        <td>{{ transaction.transaction_date }}</td>
+                        {% comment %} <td>{{ transaction.paymentby }}</td> {% endcomment %}
+                        <td>{{ transaction.unit_price }}</td>
+                        <td>{{ transaction.total_price }}</td>
+                        <td class="action-buttons" style="display: flex;" >
+                            <button class="edit" onclick="location.href='/transaction_edit/{{ transaction.id }}'">Edit</button>
+                            <button class="delete" onclick="location.href='/transaction_delete/{{ transaction.id }}'">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+{% endblock %}
+
