@@ -50,34 +50,33 @@ def addbaby(request):
         broughtby = request.POST['broughtby']
         babynumber  = request.POST['babynumber']
         message_left = request.POST['message_left']
-        # stay_duration = request.POST['stay_duration']
+        stay_duration = request.POST['stay_duration']
         # Address = request.POST['address'] 
-        baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, timein=timein,  broughtby=broughtby, babynumber=babynumber, message_left=message_left )
+        baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, timein=timein,  broughtby=broughtby, babynumber=babynumber, message_left=message_left, stay_duration=stay_duration )
         baby.save()
-        message = 'Baby added successfully'
-    context = {
-        'message':message
-    }
+    #     message.success = 'Baby added successfully'
+    #     context = {
+    #     'message':message
+    # }
     template = loader.get_template('application/add_baby.html')
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render())
 @login_required
 def addsitter(request):
     if request.method == 'POST':
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        gender = request.POST['gender']
-        age = request.POST['age']
-        address = request.POST['location']
-        contact = request.POST['contact'] 
-        status = request.POST['status']
-        sitter = Sitter(fname=fname, lname=lname, gender=gender, age=age, location=address, contact=contact, status=status)
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        gender = request.POST.get('gender')
+        age = request.POST.get('age')
+        address = request.POST.get('location')
+        contact = request.POST.get('contact')
+        sitternumber =request.POST.get('sitternumber')
+        # Determine the status based on checkbox value
+        status = request.POST.get('status')
+        sitter = Sitter(fname=fname, lname=lname, gender=gender, age=age, location=address, contact=contact, status=status, sitternumber=sitternumber)
         sitter.save()
-        # messages = 'Sitter added successfully'
-    # contxt = {
-    #     'messages': messages tis is the siiter message that refused to wrk 
-    # }
-    template = loader.get_template('application/add_sitter.html')
-    return HttpResponse(template.render())
+        return redirect('/sitter/')
+    else:
+        return render(request, 'application/add_sitter.html')
 
 @login_required
 def viewbaby(request, id):
@@ -125,7 +124,7 @@ def payment(request):
         amount = request.POST['amount']
         date = request.POST['date']
         baby_id = request.POST['id']
-        stay_duration = request.POST.get('stay_duration')
+        stay_duration = request.POST.get('category')
         baby = Baby.objects.get(id=baby_id )
         pay = Pay(baby=baby, amount= amount, date = date, stay_duration=stay_duration)
         pay.save()
@@ -157,7 +156,7 @@ def additem(request):
         # date_received = request.POST['date_recieved']
         item = Item(item_name=item_name, quantity=quantity, current_stock=current_stock)
         item.save()
-        return render(request, 'application/inventory.html')
+        return redirect('/inventory/')
     else:
         return render(request, 'application/add_inventory.html') 
     

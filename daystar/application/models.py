@@ -53,8 +53,8 @@ class Sitter(models.Model):
     educationlevel = models.CharField(max_length=20)
     sitternumber = models.CharField(max_length=50)
     contact = models.CharField(max_length=20, default=1)
-    status = models.BooleanField(default=0)
-    sit = models.ForeignKey(Baby, on_delete=models.SET_NULL, null=True, related_name='sitters')
+    status = models.CharField(max_length=10, default='Available', blank=True)
+    # sit = models.ForeignKey(Baby, on_delete=models.SET_NULL, null=True, related_name='sitters')
 
 class Item(models.Model):
     item_name = models.CharField(max_length=100)
@@ -72,7 +72,7 @@ class Pay(models.Model):
     amount = models.FloatField( null=True, blank=True)
     date = models.DateField( auto_now_add=True)
     # payee = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    # stay_duration = models.IntegerField(default=1, null=True)
+    stay_duration = models.CharField(max_length=15,default='Fullday', blank=True)
     # pay_status = models.BooleanField(default=0)
     
     def __str__(self):
