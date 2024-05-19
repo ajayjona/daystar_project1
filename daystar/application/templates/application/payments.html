@@ -7,61 +7,73 @@
             {{ messages }}
         </div>
         {% endif %}
-        <form method="POST" class="p-4 w-auto h-100 d-grid ">
-            {% csrf_token %}
-            <div class="">
-                <select name="id">
-                    <option value="">Select Baby</option>
-                    {% for baby in babies %}
-                        <option value="{{ baby.id }}">{{ baby.fname }} {{ baby.lname }}</option>
-                    {% endfor %}
-                </select>
+        <div class="container-fluid">
+            <h1 class="text-center">Add Payment</h1>
+            <div class="row">
+                <form method="POST" class=" form  ">
+                    {% csrf_token %}
+                    <div class=" d-flex flex-column p-2">
+                        <select name="id" class="p-2">
+                            <option value="">Select Baby</option>
+                            {% for baby in babies %}
+                                <option value="{{ baby.id }}">{{ baby.fname }} {{ baby.lname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <div class="d-flex flex-column p-2">
+                        <select name="amount" class="p-2"  >
+                            <option value="">Select Amount</option>
+                            <option value="10000">10,000</option>
+                            <option value="15000">15,000</option>
+                            <option value="100000">100,000</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="d-flex flex-column p-2">
+                        <select name="category" class="p-2" >
+                            <option value="">Period of Stay</option>
+                            <option value="halfday">Half Day</option>
+                            <option value="fullday">Full Day</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="d-flex flex-column p-2">
+                        <input type="date" name="date" required placeholder="Payment Date"  class="p-2 border ">
+                        
+                    </div>
+                    <br>
+                    <button type="submit" class="button w-25">Add Payment</button>
+                    <br> <br>
+                </form>
+
             </div>
             <br>
-            <div class="">
-                <select name="amount"  >
-                    <option value="">Select Amount</option>
-                    <option value="10000">10,000</option>
-                    <option value="15000">15,000</option>
-                    <option value="100000">100,000</option>
-                </select>
+            <div class="row">
+                <table class="w-100 h-50  text-center">
+                    <thead class="thead text-white">
+                        <tr>
+                            <th scope="col">Baby Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Payment Date</th>
+                            <th scope="col">Stay Duration</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pay in pays %}
+                            <tr class="border border-secondary">
+                                <td class=" border border-secondary">{{ pay.baby.fname }} {{ pay.baby.lname }}</td>
+                                <td class=" border border-secondary">{{ pay.amount }}</td>
+                                <td class=" border border-secondary">{{ pay.date }}</td>
+                                <td class=" border border-secondary">{{ pay.stay_duration }}</td> 
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            <br>
-            <div>
-                <select name="category" >
-                    <option value="">Period of Stay</option>
-                    <option value="halfday">Half Day</option>
-                    <option value="fullday">Full Day</option>
-                </select>
-            </div>
-            <br>
-            <div class="">
-                <input type="date" name="date" required placeholder="Payment Date"  class="p-2 border ">
-                
-            </div>
-            <br>
-            <button type="submit" class="btn btn-secondary w-25">Add Payment</button>
-        </form>
+        </div>
+        
         <br>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Baby Name</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Payment Date</th>
-                    <th scope="col">Stay Duration</th> 
-                </tr>
-            </thead>
-            <tbody>
-                {% for pay in pays %}
-                    <tr>
-                        <td>{{ pay.baby.fname }} {{ pay.baby.lname }}</td>
-                        <td>{{ pay.amount }}</td>
-                        <td>{{ pay.date }}</td>
-                        <td>{{ pay.stay_duration }}</td> 
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        
     </div>
 {% endblock  %}

@@ -2,16 +2,17 @@
 
 
 {% block content %}
-<div class="container-fluid">
-    <h1>Payment Successful!</h1>
-    <p>Thank you for your payment for baby {{ baby.name }}.</p>
-    <a href="{% url 'payments' %}">Return to Payments</a>
-</div>
-{% comment %} <h1>Payment Successful!</h1>
-<p>Thank you for your payment for baby {{ baby.name }}.</p>
+<div class="content">
+    <div class="container-fluid ">
+        <h1 class="text-center">Payment Successful!</h1>
+        <p class="text-center">Thank you for your payment for baby {{ baby.name }}.</p>
+        <a href="{% url 'payments' %}">Return to Payments</a>
+    </div>
 
-    <!-- Add more attributes as needed -->
-</ul> {% endcomment %}
+</div>
+
+
+
 
 
 {% endblock  %}
