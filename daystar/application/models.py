@@ -10,35 +10,7 @@ class Categorystay(models.Model):
 #
     def __str__(self):
         return self.name
-
-
-class Baby(models.Model):
-    fname = models.CharField(max_length=255)
-    lname = models.CharField(max_length=255)
-    age = models.CharField(max_length=255)
-    gender = models.CharField(max_length=255)
-    location = models.CharField(max_length=100)
-    image = models.ImageField(max_length=255)
-    broughtby = models.CharField(max_length=200)
-    timein = models.DateTimeField(auto_now=True)
-    timeout = models.DateTimeField(auto_now=True)
-    fees= models.CharField(max_length=100 , null=True, blank=True)
-    parent_name = models.CharField(max_length= 200)
-    babynumber = models.IntegerField(null=True)
-    message_left = models.TextField(max_length=1000)
-    stay_duration = models.CharField(choices=(('fullday','fullday'),('halfday', 'halfday')), max_length=50, blank=True, null=True)
-   
     
-# class daily_operations(models.Model):
-    # baby = models.ForeignKey(Baby, on_delete=models.CASCADE)
-    # date = 
-    # timein= 
-    # timeout
-    # brought _by
-    # stay_duration
-    # fees
-    # sitter= sitter id
-
 class Sitter(models.Model):
     fname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
@@ -54,7 +26,29 @@ class Sitter(models.Model):
     sitternumber = models.CharField(max_length=50)
     contact = models.CharField(max_length=20, default=1)
     status = models.CharField(max_length=10, default='Available', blank=True)
-    # sit = models.ForeignKey(Baby, on_delete=models.SET_NULL, null=True, related_name='sitters')
+    # babe= models.ForeignKey(Baby, on_delete=models.SET_NULL, null=True, related_name='babies')
+     
+    def __str__(self):
+        return f'{self.fname} {self.lname}'
+
+
+class Baby(models.Model):
+    sittr = models.ForeignKey(Sitter, on_delete=models.CASCADE, blank=False, null=False, default=True )
+    fname = models.CharField(max_length=255)
+    lname = models.CharField(max_length=255)
+    age = models.CharField(max_length=255)
+    gender = models.CharField(max_length=255)
+    location = models.CharField(max_length=100)
+    image = models.ImageField(max_length=255)
+    broughtby = models.CharField(max_length=200)
+    timein = models.DateTimeField(auto_now=True)
+    timeout = models.DateTimeField(auto_now=True)
+    fees= models.CharField(max_length=100 , null=True, blank=True)
+    parent_name = models.CharField(max_length= 200)
+    babynumber = models.IntegerField(null=True)
+    message_left = models.TextField(max_length=1000)
+    stay_duration = models.CharField(choices=(('fullday','fullday'),('halfday', 'halfday')), max_length=50, blank=True, null=True)
+
 
 class Item(models.Model):
     item_name = models.CharField(max_length=100)
@@ -62,9 +56,6 @@ class Item(models.Model):
     current_stock =models.CharField(max_length=50)
     
     
-#add sold items class
-
-
 #how to be able to access some paricular items/objects/attributes from this class in my views and table
 class Pay(models.Model):
     baby =  models.ForeignKey(Baby, on_delete=models.CASCADE, null=True, blank=True)

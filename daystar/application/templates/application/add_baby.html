@@ -33,7 +33,14 @@
                 <br>
                 <input type="text" name="timein"  required  placeholder="Time In" class="p-2  ">
             <br>
-            <input type="text" name="location" required placeholder="Enter your Address" class="p-2  ">
+            <label for="sittr" class="p2 gap-2">Assign Sitter</label>
+            <select name="sittr" id="sittr" required class="text-dark">
+                <option value="">Select Sitter</option>
+                {% for sitter in sitters %}
+                    <option class="text-dark" value="{{ sitter.id }}">{{ sitter.name }}</option>
+                {% endfor %}
+            </select>
+            {% comment %} <input type="text" name="sittr" required placeholder="assign sitter" class="p-2  "> {% endcomment %}
             <br>
             <input type="text" name="babynumber" required placeholder="Baby number"  class="p-2  ">
             <br>

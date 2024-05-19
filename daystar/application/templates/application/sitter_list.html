@@ -15,10 +15,9 @@
         <br>  <br>       
         <h2>Sitter List </h2>
         <br>
-
-        <table class="w-100 h-50 text-center ">
-            <thead class=" text-white">
-                <tr>
+        <table class="w-100 h-50 text-center border border-secondary  ">
+            <thead class=" text-white thead">
+                <tr class="border border-secondary">
                     <th>#</th>
                     <th>Name</th>
                     <th>Age</th>
@@ -32,16 +31,16 @@
             </thead>
             <tbody>
                 {% for sitter in sitters %}
-                    <tr>
+                    <tr class="border border-secondary">
                         <td>{{ sitter.id }}</td>
-                        <td><a class="text-blue text-decoration-none" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
-                        <td>{{ sitter.age }}</td>
-                        <td>{{ sitter.gender }}</td>
-                        <td>{{ sitter.sitternumber }}</td>
-                        <td>{{ sitter.contact }}</td>
-                        <td>{{ sitter.status }}</td>
-                        <td> <a class="button" href="/sitteredit/{{ sitter.id }}">Edit</a> </td>
-                        <td><a class="button" href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
+                        <td class=" border border-secondary"><a class="text-blue text-decoration-none" href="/sitter/view/{{ sitter.id}}"> {{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                        <td class=" border border-secondary">{{ sitter.age }}</td>
+                        <td class=" border border-secondary">{{ sitter.gender }}</td>
+                        <td class=" border border-secondary">{{ sitter.sitternumber }}</td>
+                        <td class=" border border-secondary">{{ sitter.contact }}</td>
+                        <td class=" border border-secondary">{{ sitter.status }}</td>
+                        <td class=" border border-secondary"> <a class="button" href="/sitteredit/{{ sitter.id }}">Edit</a> </td>
+                        <td class=" border border-secondary"><a class="button" href="/sitter/delete/{{ sitter.id }}">Delete</a></td>
                     </tr>
                 {% endfor %} 
             </tbody>

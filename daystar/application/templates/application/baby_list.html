@@ -15,9 +15,8 @@
             <br>  <br>         
             <h2>Baby List</h2>
             <br>
-
             <table class="w-100 h-50  text-center">
-                <thead class=" text-white">
+                <thead class=" thead text-white">
                     <tr>
                         <th>#</th>
                         <th>Name</th>
@@ -26,22 +25,24 @@
                         <th>Stay Duration</th>
                         <th>Time in</th>
                         <th>Message</th>
+                        <th>Assigned To:</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for baby in babies %}
-                        <tr>
+                        <tr class="border border-secondary">
                             <td>{{ baby.id }}</td>
-                            <td><a class="text-blue-500" href="/baby/view/{{ baby.id}}"> {{ baby.fname }}  {{ baby.lname }}</a></td>
-                            <td>{{ baby.age }}</td>
-                            <td>{{ baby.gender }}</td>
-                            <td>{{ baby.stay_duration }}</td>
-                            <td>{{ baby.timein }}</td>
-                            <td>{{ baby.message_left }}</td>
-                            <td><a class="button" href="/babyedit/{{ baby.id }}">Edit</a></td>
-                            <td><a class="button" href="/baby/delete/{{ baby.id }}">Delete</a></td>
+                            <td class=" border border-secondary"><a class="text-blue-500" href="/baby/view/{{ baby.id}}"> {{ baby.fname }}  {{ baby.lname }}</a></td>
+                            <td class=" border border-secondary">{{ baby.age }}</td>
+                            <td class=" border border-secondary">{{ baby.gender }}</td>
+                            <td class=" border border-secondary">{{ baby.stay_duration }}</td>
+                            <td class=" border border-secondary">{{ baby.timein }}</td>
+                            <td class=" border border-secondary">{{ baby.message_left }}</td>
+                            <td class=" border border-secondary">{{ baby.sittr }}</td>
+                            <td class=" border border-secondary"><a class="button" href="/babyedit/{{ baby.id }}">Edit</a></td>
+                            <td ><a class="button" href="/baby/delete/{{ baby.id }}">Delete</a></td>
                         </tr>
                     {% endfor %} 
                 </tbody>

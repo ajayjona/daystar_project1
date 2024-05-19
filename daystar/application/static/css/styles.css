@@ -184,19 +184,24 @@ span {
     background-color: hsl(220, 17%, 21%);   
 }
 .table{
-    display: block;
-    border: solid 1px  gray;
+    display: flex;
+    flex-direction: column;
+    /* border: solid 1px; */
     border-collapse: collapse;
     background-color:#c9f3f1;
-    /* width: 100%; */
+    /* align-items: center; */
+    /* text-align: center; */
+    /* width: 700px; */
     /* height: auto; */
     
 }
-table thead{
+.thead{
     background-color:#035E59;
-    justify-content: space-between;
+    /* justify-content: space-evenly; */
+    width: 100%;
     text-align: center;
 }
+
 
 .form{
     display: flex;
@@ -205,8 +210,8 @@ table thead{
     margin: 4px;
     width: auto;
     height:auto;
-    /* background-color:#c9f3f1; */
-    /* align-content: center; */
+    background-color:#c9f3f1;
+    align-content: center;
     
 }
 .container .fill {
@@ -238,8 +243,14 @@ table thead{
   }
  
 .btn{
-    background-color:#29274C ;
+    background-color:#035E59 ;
+    color: aliceblue;
 }
+/* a{
+    background-color: #643960fa;
+    color: white; */
+     
+
 .babe{
     display: grid;
     
@@ -249,9 +260,9 @@ table thead{
     
     background-color:rgb(3, 94, 89);
 }
-input:valid{
+/* input:valid{
     border: 2px solid green;
 }
 input:invalid{
     border: 2px solid red;
-}
+} */

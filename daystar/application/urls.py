@@ -46,5 +46,9 @@ urlpatterns = [
     
     #inventory path
     path('inventory/', views.inventory, name='inventory'),
-    path('inventory/add', views.additem, name='additem')
+    path('inventory/add', views.additem, name='additem'),
+    # path('inventory/edit/<int:id>', views.edititem, name='edititem'),
+    path('inventory/delete/<int:id>', views.deleteitem, name='deleteitem'),
+    # path('inventory/view/<int:id>', views.viewitem, name='viewitem'),
+    # path('inventory/search', views.searchitem, name='searchitem'),
 ]

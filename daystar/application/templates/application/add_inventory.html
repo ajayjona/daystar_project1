@@ -1,12 +1,29 @@
 {% extends 'application/base.html' %}
 
 {% block content %}
-   <form action="{% url 'additem' %}" method="post" class="">
+<div class="content">
+   <div class="container">
+      <h1 class="text-center">Add Items</h1>
+  </div>
+  <div class="container-fluid">
+   <form action="{% url 'additem' %}" method="POST" class=" form d-grid m-5 p-3">
       {% csrf_token %}
-      <input type="text" id="name" name="item_name" placeholder="Item Name" required><br>
-      <input type="number" placeholder="Quantity" name="quantity" required><br>
-      <input type="text" placeholder="Current stock" name="current_stock" required><br>
+      <input type="text" id="name" name="item_name" placeholder="Item Name" required><br><br>
+
+      <input type="number" placeholder="Quantity" name="quantity" required><br><br>
+
+      <input type="text" placeholder="Current stock" name="current_stock" required><br><br>
       {% comment %} <input type="date" placeholder="Recieved on" name="date_recieved" required><br> {% endcomment %}
-      <button type="submit">Add Item</button>
+      <button type="submit" class="button w-50">Add Item</button>
    </form>
+
+   {% if new_current_stock %}
+   <p>New Current Stock: {{ new_current_stock }}</p>
+{% endif %}
+
+
+  </div>
+   
+</div>
+  
 {% endblock  %}

@@ -51,79 +51,84 @@
                 <h1 class = "text-center">{{ count_payments }}</h1>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="search">
-                {% comment %} <input type="text" placeholder="search" class="rounded ">
-                <button class=" bg-secondary text-white  rounded">Search </button> {% endcomment %}
-                <br><br>
-                <a class="button" href="/sitter/add" role="button">Add Sitter</a>
-                <a class="button" href="/baby/add" role="button">Add Baby</a>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col">
-                    <h2 class="text-dark" >Recent Babies</h2>
-                    <table class="table h-100 w-100 text-center">
-                        <thead class=" text-white text-center">
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>Gender</th>
-                                <th>Time In</th>
-                                <th>Baby Number</th>
-                                <th>Stay Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            {% for baby in recent_babies %}
-                            <tr>
-                                <td>{{ baby.id }}</td>
-                                <td><a class="text-primary text-decoration-none" href="/baby/view/{{ baby.id }}">{{ baby.fname }}  {{ baby.lname }}</a></td>
-                                <td>{{baby.age}}</td>
-                                <td>{{ baby.gender }}</td>
-                                <td>{{ baby.timein }}</td>
-                                <td>{{baby.babynumber}}</td>
-                                <td>{{ baby.stay_duration }}</td>
-                                <td></td>
-                            </tr>
-                            
-                            {% endfor %}
-                        </tbody>
-                    </table>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="search">
+                    <input type="text" placeholder="search" class="rounded w-75 "> 
+                    <button class=" bg-secondary text-white  rounded">Search </button> 
+                    <br><br>
+                    <a class="button" href="/sitter/add" role="button">Add Sitter</a>
+                    <a class="button" href="/baby/add" role="button">Add Baby</a>
                 </div>
-                <div class="col">
-                    <h2 class="text-dark" >Recent Sitters</h2>
-                    <table class=" table w-100 h-100 text-dark text-center">
-                        <thead class="text-white  text-center w-100">
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>Gender</th>
-                                <th>Sitter Number</th>
-                                <th>Status</th>
-                                <th>Contact</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for sitter in recent_sitters %}
-                            <tr>
-                                <td>{{ sitter.id }}</td>
-                                <td><a class="text-primary text-decoration-none " href="/sitter/view/{{ sitter.id }}">{{ sitter.fname }}  {{ sitter.lname }}</a></td>
-                                <td>{{sitter.age}}</td>
-                                <td>{{ sitter.gender }}</td>
-                                <td>{{sitter.sitternumber}}</td>
-                                <td>{{ sitter.status }}</td>
-                                <td>{{ sitter.contact }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2 class="text-dark" >Recent Babies</h2>
+                        <table class=" h-100 w-100 text-dark text-center">
+                            <thead class="  text-white text-center w-100 thead" >
+                                <tr class="border border-secondary">
+                                    <th class="border border-secondary">#</th>
+                                    <th class="border border-secondary">Name</th>
+                                    <th class="border border-secondary">Age</th>
+                                    <th class="border border-secondary">Gender</th>
+                                    <th class="border border-secondary">Time In</th>
+                                    <th class="border border-secondary">Baby Number</th>
+                                    <th class="border border-secondary">Stay Duration</th>
+                                    <th class="border border-secondary"> Assigned to:</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                {% for baby in recent_babies %}
+                                <tr class="border border-secondary">
+                                    <td>{{ baby.id }}</td>
+                                    <td class=" border border-secondary"><a class="text-primary text-decoration-none" href="/baby/view/{{ baby.id }}">{{ baby.fname }}  {{ baby.lname }}</a></td>
+                                    <td class=" border border-secondary">{{baby.age}}</td>
+                                    <td class=" border border-secondary">{{ baby.gender }}</td>
+                                    <td class=" border border-secondary">{{ baby.timein }}</td>
+                                    <td class=" border border-secondary">{{baby.babynumber}}</td>
+                                    <td class=" border border-secondary">{{ baby.stay_duration }}</td>
+                                    <td class=" border border-secondary">{{ baby.sittr }}</td>
+                                    
+                                </tr>
+                                
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="text-dark" >Recent Sitters</h2>
+                        <table class="  w-100  h-100 text-dark text-center border">
+                            <thead class="text-white  text-center thead  w-100">
+                                <tr class="border border-secondary">
+                                    <th>#</th>
+                                    <th class="border border-secondary">Name</th>
+                                    <th class="border border-secondary">Age</th>
+                                    <th class="border border-secondary">Gender</th>
+                                    <th class="border border-secondary">Sitter Number</th>
+                                    <th class="border border-secondary">Status</th>
+                                    <th class="border border-secondary">Contact</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                {% for sitter in recent_sitters %}
+                                <tr class=" border border-secondary">
+                                    <td>{{ sitter.id }}</td>
+                                    <td class=" border border-secondary"><a class="text-primary text-decoration-none " href="/sitter/view/{{ sitter.id }}">{{ sitter.fname }}  {{ sitter.lname }}</a></td>
+                                    <td class=" border border-secondary" >{{sitter.age}}</td>
+                                    <td class=" border border-secondary">{{ sitter.gender }}</td>
+                                    <td class=" border border-secondary">{{sitter.sitternumber}}</td>
+                                    <td class=" border border-secondary">{{ sitter.status }}</td>
+                                    <td class=" border border-secondary">{{ sitter.contact }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
         </div>
+        
         
     
 

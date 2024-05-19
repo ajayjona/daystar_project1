@@ -37,29 +37,69 @@ def index(request):
     template = loader.get_template('application/index.html')
     return HttpResponse(template.render(context))
 @login_required
+
 def addbaby(request):
-    message = None
     if request.method == 'POST':
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        gender = request.POST['gender']
-        age = request.POST['age']
-        parent_name = request.POST['parent_name']
-        timein  = request.POST['timein']
-        # fees = request.POST['fees']
-        broughtby = request.POST['broughtby']
-        babynumber  = request.POST['babynumber']
-        message_left = request.POST['message_left']
-        stay_duration = request.POST['stay_duration']
-        # Address = request.POST['address'] 
-        baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, timein=timein,  broughtby=broughtby, babynumber=babynumber, message_left=message_left, stay_duration=stay_duration )
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        gender = request.POST.get('gender')
+        age = request.POST.get('age')
+        parent_name = request.POST.get('parent_name')
+        broughtby = request.POST.get('broughtby')
+        timein = request.POST.get('timein')
+        babynumber = request.POST.get('babynumber')
+        sittr_id = request.POST.get('sittr')
+        message_left = request.POST.get('message_left')
+        stay_duration = request.POST.get('stay_duration')
+        
+        sittr = Sitter.objects.get(id = sittr_id)
+        
+        baby = Baby(
+            fname=fname,
+            lname=lname,
+            gender=gender,
+            age=age,
+            parent_name=parent_name,
+            timein=timein,
+            broughtby=broughtby,
+            babynumber=babynumber,
+            sittr=sittr,
+            message_left=message_left,
+            stay_duration=stay_duration
+        )
         baby.save()
-    #     message.success = 'Baby added successfully'
-    #     context = {
-    #     'message':message
-    # }
-    template = loader.get_template('application/add_baby.html')
-    return HttpResponse(template.render())
+        return redirect('/baby/')
+    else:
+        sitters = Sitter.objects.all()
+        print(sitters)
+        return render(request, 'application/add_baby.html', {'sitters':sitters})
+        
+        
+        
+
+# def addbaby(request):
+#     message = None
+#     if request.method == 'POST':
+#         fname = request.POST['fname']
+#         lname = request.POST['lname']
+#         gender = request.POST['gender']
+#         age = request.POST['age']
+#         parent_name = request.POST['parent_name']
+#         timein  = request.POST['timein']
+#         # fees = request.POST['fees']
+#         broughtby = request.POST['broughtby']
+#         babynumber  = request.POST['babynumber']
+#         message_left = request.POST['message_left']
+#         stay_duration = request.POST['stay_duration']
+#         # Address = request.POST['address'] 
+#         baby = Baby(fname=fname, lname=lname, gender=gender, age=age, parent_name=parent_name, timein=timein,  broughtby=broughtby, babynumber=babynumber, message_left=message_left, stay_duration=stay_duration )
+#         baby.save()
+#     #     message.success = 'Baby added successfully'
+#     #     context = {
+#     #     'message':message
+#     # }
+#     template = loader.get_template('application/add_baby.html')
+#     return HttpResponse(template.render())
 @login_required
 def addsitter(request):
     if request.method == 'POST':
@@ -139,31 +179,59 @@ def payment_success(request, id):
     return render(request, 'application/payment_success.html', {'baby':baby})
 
 @login_required
+# def inventory(request):
+#     items = Item.objects.all()
+#     context = {
+#         'items': items
+#     }
+#     template = loader.get_template('application/inventory.html')
+#     return HttpResponse(template.render(context))
+
 def inventory(request):
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        item_count = int(request.POST.get('item_count', 1))  # Default to 1 if not provided
+        
+        # Check if the item already exists
+        item, created = Item.objects.get_or_create(name=item_name)
+        
+        if created:
+            # Item did not exist and was created
+            item.count = item_count
+        else:
+            # Item already exists, so increment its count
+            item.count += item_count
+            
+        item.save()
+        
+        # Redirect to the inventory page after processing the form submission
+        return redirect('inventory')
+    
+    # For GET request, just display the inventory
     items = Item.objects.all()
     context = {
         'items': items
     }
     template = loader.get_template('application/inventory.html')
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def additem(request):
     if request.method == 'POST':
         item_name = request.POST['item_name']
-        quantity = request.POST['quantity']
-        current_stock = request.POST['current_stock']
-        # date_received = request.POST['date_recieved']
-        item = Item(item_name=item_name, quantity=quantity, current_stock=current_stock)
+        quantity = int(request.POST['quantity'])
+        current_stock = int(request.POST['current_stock'])
+        
+        new_current_stock = current_stock + quantity
+        
+        item = Item(item_name=item_name, quantity=quantity, current_stock=new_current_stock)
         item.save()
         return redirect('/inventory/')
     else:
         return render(request, 'application/add_inventory.html') 
     
-@login_required
-def settings(request):
-    template = loader.get_template('application/settings.html')
-    return HttpResponse(template.render())
+    
+
 
 @login_required
 def register(request):
@@ -417,8 +485,21 @@ def deletebaby(request, id):
     baby.delete()
     return redirect('/baby/')
 
+def deleteitem(request, id):
+    thing = Item.objects.get(id=id)
+    thing.delete()
+    return redirect('/inventory/')
+
 
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+
+
+@login_required
+def settings(request):
+    template = loader.get_template('application/settings.html')
+    return HttpResponse(template.render())
+
      

@@ -24,23 +24,17 @@
                     menu
                     </span>
             </div>
-            {% comment %} <div class="header-left">
-                <span class="material-icons-outlined">
-                    search  </span>
-                    <input type="text" class="search-input" placeholder="Search...">
-                    <button type="submit" ><a href="sitter/"> Search</a></button>
-            </div> {% endcomment %}
-            <div class="header-right">
+            {% comment %} <div class="header-right">
                 <span class="material-icons-outlined">
                     notifications</span>
                     <span class="material-icons-outlined">
                         email </span>
                         <span class="material-icons-outlined">
                             account_circle </span>
-            </div>
-            <button type="button" class="button text-white"><a href="{% url 'logout' %}">Logout</a></button> 
+            </div> {% endcomment %}
+            
         </header>
- <!-- end header -->
+        <!-- end header -->
 
 
         <!-- sidebar -->
@@ -95,7 +89,10 @@
                             </span>Doll Store
                     </li>
                 </a>
+                <button type="submit" class="button  m-4"><a class="text-decoration-none text-white" href="{% url 'logout' %}">Logout</a></button>
+                {% comment %} <input type="submit" class="button m-4" placeholder="Logout"> {% endcomment %}
             </ul>
+           
            
         </aside>
         {% comment %} <div class="footer ">

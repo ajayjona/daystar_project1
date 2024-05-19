@@ -3,42 +3,41 @@
 
 {% block content %}
 <div class="content">
-    <div class="p-2 flex gap-2 justify-end ">
-        <a  class= "button " href="/sitteredit/{{ sitter.id }}">Edit</a>
-        <a href="/sitter/edit/{{ id }}" class=""> Edit sitter</a>
-        <a href="/baby/delet/{{ id }}" class="">Delete sitter</a>
-    </div>
-    <div class="w-full grid grid-cols-10 p-4">
+    <div class="w-100  p-4">
         <div>
-            <img src="https://picsum.photos/200" class="h-[200px] rounded-lg" alt="">
+            <img src="https://picsum.photos/200" class="h-[200px] rounded-lgc" alt="">
         </div>
-        <div class="">
-            <table>
+        <h1 class="p-4">{{ sitters.lname }}'s Information</h1>
+        <br><br>
+        <a class="button" href="/sitteredit/{{ sitters.id }}">Edit</a>
+        <br><br>
+        <div class="table">
+            <table class="table w-100 h-100 text-dark text-center">
                 <tr>
-                    <th>Name</th>
+                    <th>Name:</th>
                     <td>{{ sitters.fname }}  {{ sitters.lname }}</td>
                 </tr>
                 <tr>
-                    <th>Age</th>
+                    <th>Age:</th>
                     <td>{{ sitters.age }}</td>
                 </tr>
                 <tr>
-                    <th>Gender</th>
+                    <th>Gender:</th>
                     <td>{{ sitters.gender }}</td>
                 </tr>
                 <tr>
-                    <th>Room </th>
+                    <th>Room:</th>
                     <td>{{ sitters.sitternumber }}</td>
                 </tr>
                 <tr>
-                    <th>status</th>
+                    <th>status:</th>
                     <td>{{ sitters.status }}</td>
                 </tr>
             </table>
         </div>
     </div>
-    <h1 class="p-4">{{ sitters.lname }}'s Information</h1>
-    <table class="w-full mt-4 p-4">
+   
+    {% comment %} <table class="w-full mt-4 p-4">
         <thead class="bg-black text-white">
             <tr>
                 <th>#</th>
@@ -48,7 +47,7 @@
                 <th>Sitter Activity</th>
                 <th>Available</th>
             </tr>
-        </thead>
+        </thead> {% endcomment %}
     </table>
 </div>
 {% endblock  %}
