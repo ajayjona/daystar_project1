@@ -5,14 +5,14 @@
 
     <div class="form-container">
 
-        <form method="POST" class="form" oninput="calculateTotal()">
+        {% comment %} <form method="POST" class="form" oninput="calculateTotal()">
             
                     <h5>Record Transaction</h5>
                     {% csrf_token %}
                     <label for="item">Doll :</label>
-                    <select class="choices" name="doll_name" id="doll_name">
+                    <select class="choices" name="doll_id" id="item_name">
                         {% for item in items %}
-                            <option value="{{ item.id }}">{{ item.doll_name }}</option>
+                            <option value="{{ item.item_id }}">{{ item.item_name }}</option>
                         {% endfor %}
                     </select><br><br>
 
@@ -29,8 +29,8 @@
                     <label for="quantity">Quantity:</label>
                     <input type="number" name="transaction_quantity" id="transaction_quantity"><br><br>
 
-                    <label for="paymentby">Payment Date:</label>
-                    <input type="text" name="paymentby" id="paymentby"><br><br>
+                    {% comment %} <label for="paymentby">Payment Date:</label>
+                    <input type="date" name="paymentby" id="paymentby"><br><br>
 
                     <label for="unit_price"> Unit Price:</label>
                     <input type="number" name="unit_price" id="unit_price"><br><br>
@@ -41,7 +41,7 @@
                     <button type="submit" class="submit-button">Submit</button>
             
             
-        </form>
+        </form> {% endcomment %}
         <div style=" display:grid; grid-template-columns: 1fr 1fr 1fr; column-gap:20px; row-gap:20px; ">
             {% if message != None %}
             <div style="background-color:orange;grid-column: 2; ">

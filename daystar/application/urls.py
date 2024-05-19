@@ -7,7 +7,6 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
    
     path('', auth_views.LoginView.as_view(template_name='application/login.html'), name='login'),
-    # path('', views.log_in, name='login'),
     path('register/', views.register, name='register'),
     path('logout/',views.logout_view, name='logout'),
     #home path
@@ -35,8 +34,8 @@ urlpatterns = [
     
     #doll transactions
     path('transaction_list/', views.transaction_list, name='transaction_list'),
-    path('transaction_add/',views.transaction_add, name='add_transaction'),
-    path('transaction_edit/<int:id>',views.transaction_edit, name='edit_transaction'),
+    # path('transaction_add/',views.transaction_add, name='add_transaction'),
+    # path('transaction_edit/<int:id>',views.transaction_edit, name='edit_transaction'),
     path('transaction_delete/<int:id>',views.transaction_delete, name='delete_transaction'),
     
     #payments path

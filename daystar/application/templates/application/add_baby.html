@@ -37,7 +37,8 @@
             <select name="sittr" id="sittr" required class="text-dark">
                 <option value="">Select Sitter</option>
                 {% for sitter in sitters %}
-                    <option class="text-dark" value="{{ sitter.id }}">{{ sitter.name }}</option>
+                    <option class="text-dark" value="{{ sitter.id }}">{{ sitter.fname }}</option>
+                    {% comment %} <option class="text-dark" value="{{ sitter.id }}">{{ sitter.name }}</option> {% endcomment %}
                 {% endfor %}
             </select>
             {% comment %} <input type="text" name="sittr" required placeholder="assign sitter" class="p-2  "> {% endcomment %}

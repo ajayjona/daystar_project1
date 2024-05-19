@@ -48,7 +48,7 @@ def addbaby(request):
         broughtby = request.POST.get('broughtby')
         timein = request.POST.get('timein')
         babynumber = request.POST.get('babynumber')
-        sittr_id = request.POST.get('sittr')
+        sittr_id = request.POST.get('id')
         message_left = request.POST.get('message_left')
         stay_duration = request.POST.get('stay_duration')
         
@@ -139,9 +139,7 @@ def viewsitter(request,id):
     }
     template = loader.get_template('application/view_sitter.html')
     return HttpResponse(template.render(context))
-    
-    
-    
+        
 @login_required
 def baby(request):
     babies = Baby.objects.all()
@@ -230,8 +228,6 @@ def additem(request):
     else:
         return render(request, 'application/add_inventory.html') 
     
-    
-
 
 @login_required
 def register(request):
@@ -251,9 +247,9 @@ def register(request):
         myuser.save()
         
         messages.success(request, 'Your account has been created successfully!')
-        return redirect('/')
-        
-    return render(request, 'application/register.html')
+        return redirect('/login/')
+    else:
+        return render(request, 'application/register.html')
 
 @login_required
 def doll_list(request):
@@ -315,88 +311,91 @@ def transaction_delete(request, id):
     return redirect('/transaction_list/')      
 
 
-def transaction_add(request):
-    if request.method == 'POST':
-        item_id = request.POST['doll_name']
-        transaction_type = request.POST['transaction_type']
-        transaction_quantity = request.POST['transaction_quantity']
+# def transaction_add(request):
+#     if request.method == 'POST':
+#         item_id = request.POST['doll_id']
+#         transaction_type = request.POST['transaction_type']
+#         transaction_quantity = request.POST['transaction_quantity']
         
-        # Retrieve the item from Shopitem model
-        item = Doll_item.objects.get(pk=item_id)
+#         # Retrieve the item from Shopitem model
+#         item = Doll_item.objects.get(id=item_id)
         
-        if transaction_type == 'BUY':
-            item.item_quantity += int(transaction_quantity)
-            item.save()
-        elif transaction_type == 'SELL':
-            if item.item_quantity >= int( transaction_quantity):
-                item.shop_quantity -= int( transaction_quantity)
-                item.save()
-            else:
-                # Handle insufficient quantity scenario here
-                pass
+#         if transaction_type == 'BUY':
+#             item.item_quantity += int(transaction_quantity)
+#             item.save()
+#         elif transaction_type == 'SELL':
+#             if item.item_quantity >= int( transaction_quantity):
+#                 item.item_quantity -= int( transaction_quantity)
+#                 item.save()
+#             else:
+#                 # Handle insufficient quantity scenario here
+#                 return render(request, 'application/transaction_add.html', {
+#             'items': Doll_item.objects.all(),
+#             'error_message': 'Insufficient quantity available.'
+#         })
         
-        # Create Transaction object
-        Doll_transction.objects.create(
-             item=item,
-            transaction_type=transaction_type,
-            transaction_quantity=transaction_quantity,
-           transaction_date=request.POST.get('transaction_date'),
-            unit_price=request.POST.get('unit_price'),
-            total_price=request.POST.get('total_price')
-        )
+#         # Create Transaction object
+#         Doll_transction.objects.create(
+#             item_id=item_id,
+#             transaction_type=transaction_type,
+#             transaction_quantity=transaction_quantity,
+#            transaction_date=request.POST.get('transaction_date'),
+#             unit_price=request.POST.get('unit_price'),
+#             total_price=request.POST.get('total_price')
+#         )
         
-        return redirect('/transaction_list/')
-    else:
-        items = Doll_item.objects.all()
-        return render(request, 'application/transaction_add.html', {'items': items})
+#         return redirect('/transaction_list/')
+#     else:
+#         items = Doll_item.objects.all()
+#         return render(request, 'application/transaction_add.html', {'items': items})
 
 
-@login_required
-def transaction_edit(request, id):
-    if request.method == 'POST':
-        item_id = request.POST['item']
-        transaction_type = request.POST['transaction_type']
-        transaction_quantity= request.POST['transaction_quantity']
+# @login_required
+# def transaction_edit(request, id):
+#     if request.method == 'POST':
+#         item_id = request.POST['item']
+#         transaction_type = request.POST['transaction_type']
+#         transaction_quantity= request.POST['transaction_quantity']
         
-        try:
-            item = Doll_item.objects.get(pk=item_id)
-        except Doll_item.DoesNotExist:
-            return render(request, 'error.html', {'message': 'Item not found'})
+#         try:
+#             item = Doll_item.objects.get(pk=item_id)
+#         except Doll_item.DoesNotExist:
+#             return render(request, 'error.html', {'message': 'Item not found'})
         
-        if transaction_type == 'BUY':
-            item.item_quantity += int(transaction_quantity)
-            item.save()
-        elif transaction_type == 'SELL':
-            if item.item_quantity >= int(transaction_quantity):
-                item.item_quantity -= int(transaction_quantity)
-                item.save()
-            else:
-                return render(request, 'error.html', {'message': 'Insufficient quantity'})
+#         if transaction_type == 'BUY':
+#             item.item_quantity += int(transaction_quantity)
+#             item.save()
+#         elif transaction_type == 'SELL':
+#             if item.item_quantity >= int(transaction_quantity):
+#                 item.item_quantity -= int(transaction_quantity)
+#                 item.save()
+#             else:
+#                 return render(request, 'error.html', {'message': 'Insufficient quantity'})
         
-        # Retrieving the transaction object
-        try:
-            transaction = Doll_transction.objects.get(pk=id)
-        except Doll_transction.DoesNotExist:
-            return render(request, 'error.html', {'message': 'Transaction not found'})
+#         # Retrieving the transaction object
+#         try:
+#             transaction = Doll_transction.objects.get(pk=id)
+#         except Doll_transction.DoesNotExist:
+#             return render(request, 'error.html', {'message': 'Transaction not found'})
         
-        # Updating Transaction object
-        transaction.item = item
-        transaction.transaction_type = transaction_type
-        transaction.transaction_quantity = transaction_quantity
-        # transaction.paymentby = request.POST.get('paymentby')
-        transaction.unit_price = request.POST.get('unit_price')
-        transaction.total_price = request.POST.get('total_price')
-        transaction.save()
+#         # Updating Transaction object
+#         transaction.item = item
+#         transaction.transaction_type = transaction_type
+#         transaction.transaction_quantity = transaction_quantity
+#         # transaction.paymentby = request.POST.get('paymentby')
+#         transaction.unit_price = request.POST.get('unit_price')
+#         transaction.total_price = request.POST.get('total_price')
+#         transaction.save()
         
-        return redirect('/transaction_list/')
-    else:
-        items = Doll_item.objects.all()
-        try:
-            transaction = Doll_transction.objects.get(pk=id)
-        except Doll_transction.DoesNotExist:
-            return render(request, 'error.html', {'message': 'Transaction not found'})
+#         return redirect('/transaction_list/')
+#     else:
+#         items = Doll_item.objects.all()
+#         try:
+#             transaction = Doll_transction.objects.get(pk=id)
+#         except Doll_transction.DoesNotExist:
+#             return render(request, 'error.html', {'message': 'Transaction not found'})
         
-        return render(request, 'application/transaction_edit.html', {'items': items, 'transaction': transaction})
+#         return render(request, 'application/transaction_edit.html', {'items': items, 'transaction': transaction})
 
 
 
